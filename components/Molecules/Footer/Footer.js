@@ -1,108 +1,34 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Button from '@/components/Atoms/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
-import { FaLinkedin, FaInstagram } from 'react-icons/fa6';
-import { siteName, siteEmail, socialMedia } from '@/utils/constants';
-import { navItems } from '@/utils';
-import Button from '@/components/Atoms/Button';
-import BrandIcon from '@/components/Atoms/BrandIcon';
+import { FaInstagram } from 'react-icons/fa6';
+import { siteName, socialMedia } from '@/utils/constants';
+import BrandIcon from '@/components/Atoms/BrandIcon/BrandIcon';
 
-const Footer = () => {
+const Footer = ({ noPreFooter }) => {
   const { t } = useTranslation('common');
   return (
-    <footer className="text-white bg-gradient-to-r from-dark-blue to-purple">
-      <div className="px-4 py-16 mx-auto md:container sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-4 mb-16">
+    <footer className="text-white">
+      <section className="px-4 py-16 mx-auto md:container sm:px-6 lg:px-8">
+        <div
+          className={`${noPreFooter ? 'hidden' : 'flex'}  flex-col items-center gap-4 mb-16 `}
+        >
           <h2 className="text-[6vw] md:text-[40px] lg:text-[50px] font-bold">
-            <span>Take your </span>
-            <span className="text-primary-color">Shot</span>
+            <span>Free Style </span>
+            <span className="text-primary-color">Photography</span>
           </h2>
           <p className="text-[20px] md:text-[30px] lg:text-[40px] font-bold">
             Let&apos;s | Work
           </p>
-          <Link href={navItems[4].path}>
+        </div>
+        <div className="flex flex-col items-center gap-12 text-white">
+          <Link href="/contact">
             <Button className="btn btn-primary group">
-              <span className="mr-2">{t('nav_contact_title')}</span>
-              <span className="transition-colors duration-300 text-primary-color group-hover:text-black">
-                <BrandIcon />
-              </span>
+              {t('nav_contact_title')}
             </Button>
           </Link>
-        </div>
-        <div className="flex justify-center">
-          <div className="w-20">
-            <Image
-              src="/vertical-logo.svg"
-              alt="Tusk Content Logo"
-              width={80}
-              height={120}
-              priority
-              className="object-contain h-auto w-100"
-            />
-          </div>
-        </div>
-        <div className="justify-between text-center md:flex md:text-left">
-          <div className="my-6 md:my-0">
-            <Link href="/terms-conditions">
-              <p>{t('terms_conditions')}</p>
-            </Link>
-            <p>
-              <a href={`mailto:${siteEmail}`}>{siteEmail}</a>
-            </p>
-          </div>
-          <ul className="flex flex-wrap justify-between m-auto mb-2 lg:m-0 max-w-80">
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image src="/cl.svg" alt="Chile flag" width={24} height={24} />
-              </span>
-              <span>{t('footer_locations.chile')}</span>
-            </li>
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image src="/pl.svg" alt="Poland flag" width={24} height={24} />
-              </span>
-              <span>{t('footer_locations.poland')}</span>
-            </li>
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image
-                  src="/spa.svg"
-                  alt="Spanish flag"
-                  width={24}
-                  height={24}
-                />
-              </span>
-              <span>{t('footer_locations.spain')}</span>
-            </li>
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image
-                  src="/mx.svg"
-                  alt="Mexican flag"
-                  width={24}
-                  height={24}
-                />
-              </span>
-              <span>{t('footer_locations.mexico')}</span>
-            </li>
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image
-                  src="/hk.svg"
-                  alt="Hong Kong flag"
-                  width={24}
-                  height={24}
-                />
-              </span>
-              <span>{t('footer_locations.hong_kong')}</span>
-            </li>
-            <li className="flex w-1/3 gap-2">
-              <span className="hidden">
-                <Image src="/us.svg" alt="USA flag" width={24} height={24} />
-              </span>
-              <span>{t('footer_locations.usa')}</span>
-            </li>
-          </ul>
+
+          <BrandIcon />
         </div>
         <div className="pt-4">
           <div className="text-center">
@@ -116,15 +42,6 @@ const Footer = () => {
                   <FaInstagram />
                 </a>
               </li>
-              <li>
-                <a
-                  href={socialMedia.linkedin}
-                  target="_blank"
-                  className="transition hover:opacity-75"
-                >
-                  <FaLinkedin />
-                </a>
-              </li>
             </ul>
             <p className="text-base text-white">
               &copy; {new Date().getFullYear()} {siteName}.{' '}
@@ -132,7 +49,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </footer>
   );
 };

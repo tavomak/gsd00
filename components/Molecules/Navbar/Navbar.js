@@ -29,14 +29,14 @@ const Navbar = () => {
     };
   }, [viewportWidth]);
   return (
-    <header className="relative z-20 p-2 transition">
+    <header className="relative z-20 p-2 transition bg-white">
       {viewportWidth < 972 ? (
         <MobileNavigation
           menuOpen={menuOpen}
           setMenuOpen={setMenuOpen}
           navItems={navItems}
           handleClick={handleClick}
-          image="/horizontal-logo.svg"
+          image="/horizontal-logo.png"
         />
       ) : (
         <DesktopNavigation

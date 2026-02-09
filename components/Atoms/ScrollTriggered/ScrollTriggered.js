@@ -1,50 +1,56 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import Link from 'next/link';
 import Image from 'next/image';
 
-const Item = ({ title, primaryImage }) => {
+const setTranslateOffset = (index) => {
+  if (index === 1) return 20;
+  if (index > 20) return 40;
+  return index * 2;
+};
+
+const ScrollTriggered = ({ src, alt, width, height, position, index }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'start start'],
+    offset: ['start end', 'end start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 0.7]);
+  const translateY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [20, setTranslateOffset(index)]
+  );
 
   return (
-    <div ref={ref} className="sticky top-0 mb-10 xl:mb-20">
+    <div ref={ref} className="sticky mb-10 top-20 xl:mb-20">
       <motion.div
         style={{
           scale,
+          translateY,
           transition: 'ease-in-out',
         }}
-        className="overflow-hidden border rounded-lg xl:rounded-3xl border-neutral-800"
+        className="overflow-hidden border border-neutral-800 max-h-[50vh]"
       >
         <Image
-          src={primaryImage?.url}
-          alt={`Image ${title}`}
-          width={primaryImage?.width || 1440}
-          height={primaryImage?.height || 810}
+          src={src}
+          alt={alt}
+          width={width || 1440}
+          height={height || 810}
           priority
           style={{
             width: '100%',
-            height: 'auto',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: position || 'top',
+            overflow: 'hidden',
+            maxHeight: '50vh',
           }}
+          className="shadow-xl"
         />
       </motion.div>
     </div>
   );
 };
-
-const ScrollTriggered = ({ items }) => (
-  <section>
-    {items.map((project) => (
-      <Link href={`/projects/${project.slug}`} key={project.title}>
-        <Item title={project.title} primaryImage={project.primaryImage} />
-      </Link>
-    ))}
-  </section>
-);
 
 export default ScrollTriggered;

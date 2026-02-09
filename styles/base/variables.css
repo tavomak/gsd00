@@ -1,7 +1,7 @@
 :root {
   --white: #ffffff;
-  --black: #000000;
-  --primary-color: #48b694;
+  --black: #0d0d0d;
+  --primary-color: #cb820c;
 
   --primary-font: var(--font-poppins), sans-serif;
 

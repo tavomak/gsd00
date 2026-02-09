@@ -17,6 +17,7 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (form) => {
+    // eslint-disable-next-line no-console
     console.log({
       form,
       publicKey: process.env.NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY,

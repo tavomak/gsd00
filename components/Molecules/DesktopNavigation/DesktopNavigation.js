@@ -12,31 +12,20 @@ const DesktopNavigation = ({
   handleClick,
 }) => {
   const { t } = useTranslation('common');
-  const firstThreeItems = navItems.slice(0, 3);
-  const lastThreeItems = navItems.slice(3, 6);
+  const lastThreeItems = navItems.slice(0, 4);
   return (
     <nav
-      className="container relative flex items-center justify-between max-w-screen-xl mx-auto md:px-4"
+      className="container relative flex items-center justify-between max-w-screen-xl mx-auto text-black md:px-4"
       aria-label="Global"
     >
-      <div className="w-1/3">
-        <ul className="flex justify-around">
-          {firstThreeItems
-            .filter((item) => item.visible)
-            .map((item) => (
-              <li key={item.label}>
-                <Link href={item.path}>{t(item.label)}</Link>
-              </li>
-            ))}
-        </ul>
-      </div>
-      <div className="flex justify-center w-1/3">
+      <div className="flex w-1/3">
         <Link href="/">
           <Image
-            src="/vertical-logo.svg"
+            src="/horizontal-logo.png"
             alt={siteName}
-            width={60}
-            height={90}
+            width={220}
+            height={60}
+            className="object-contain object-left max-h-9"
             priority
           />
         </Link>

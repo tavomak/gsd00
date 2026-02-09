@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -6,10 +7,38 @@ import Navbar from '@/components/Molecules/Navbar';
 import Footer from '@/components/Molecules/Footer';
 import PropTypes from 'prop-types';
 import { siteName } from '@/utils';
+import GoToTopButton from '@/components/Molecules/GoToTopButton';
 
-const Layout = ({ children, title, description, schema, className, image }) => {
+const Layout = ({
+  children,
+  title,
+  description,
+  schema,
+  className,
+  image,
+  noPreFooter,
+}) => {
   const hostname = typeof window !== 'undefined' ? window.location.href : '';
   const { t, lang } = useTranslation('common');
+  const [showTopBtn, setShowTopBtn] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    });
+    return () => {
+      window.removeEventListener('scroll', () => {
+        if (window.scrollY > 600) {
+          setShowTopBtn(true);
+        } else {
+          setShowTopBtn(false);
+        }
+      });
+    };
+  }, []);
   return (
     <>
       <Head>
@@ -110,7 +139,8 @@ const Layout = ({ children, title, description, schema, className, image }) => {
         {children}
       </main>
       <ToastContainer />
-      <Footer />
+      {showTopBtn && <GoToTopButton />}
+      <Footer noPreFooter={noPreFooter} />
       {schema && (
         // eslint-disable-next-line
         <Script
@@ -128,6 +158,11 @@ const Layout = ({ children, title, description, schema, className, image }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
+  description: PropTypes.string,
+  schema: PropTypes.shape({}),
+  className: PropTypes.string,
+  image: PropTypes.string,
+  noPreFooter: PropTypes.bool,
 };
 
 export default Layout;

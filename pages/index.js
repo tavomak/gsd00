@@ -1,14 +1,17 @@
-import Link from 'next/link';
+import { useState } from 'react';
 import { getPageBySlug } from '@/utils/lib/api';
-import useTranslation from 'next-translate/useTranslation';
 
 import Marquee from 'react-fast-marquee';
 import Layout from '@/components/Templates/Layout';
 import VideoIframe from '@/components/Atoms/VideoIframe';
 import RichContent from '@/components/Atoms/RichContent';
 import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
-import Button from '@/components/Atoms/Button';
-import BrandIcon from '@/components/Atoms/BrandIcon';
+import Lightbox from 'yet-another-react-lightbox';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/styles.css';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+
+import { galleryImages } from '@/utils';
 
 export async function getStaticProps(context) {
   const { locale } = context;
@@ -24,32 +27,30 @@ export async function getStaticProps(context) {
 }
 
 const Home = ({ data }) => {
-  const { t } = useTranslation('common');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   return (
     <Layout
       title={data?.seoMetadata?.title}
       description={data?.seoMetadata?.seoDescription}
       image={data?.seoMetadata?.seoImage?.url}
     >
-      <section className="container mx-auto max-w-screen-2xl">
-        <div className="mx-4 overflow-hidden border rounded-xl xl:rounded-3xl border-neutral-800">
-          <VideoIframe videoId={data?.primaryVideo} controls muted />
-        </div>
-      </section>
-
-      <section className="py-6 overflow-x-hidden lg:py-10">
-        <Marquee speed={200}>
-          <h2 className="flex gap-4 py-6 text-6xl font-bold 2xl:text-9xl me-20">
-            <span> Mobile </span>
-            <span className="text-primary-color">Design </span>
-            <span>
-              <i>Filmmaking</i>
-            </span>
+      <section className="py-2 overflow-x-hidden lg:py-4">
+        <Marquee speed={200} autoFill>
+          <h2 className="flex gap-4 py-2 text-2xl font-bold uppercase 2xl:text-4xl me-20">
+            <span> Free Style </span>
+            <span className="text-primary-color">Photography </span>
           </h2>
         </Marquee>
       </section>
 
-      <section className="container flex flex-col justify-between gap-4 px-4 mx-auto xl:gap-10 lg:flex-row">
+      <section className="container max-w-screen-xl mx-auto">
+        <div className="mx-4 overflow-hidden border border-neutral-800">
+          <VideoIframe videoId="1031092352" controls muted />
+        </div>
+      </section>
+
+      <section className="container flex-col justify-between hidden gap-4 px-4 mx-auto xl:gap-10 lg:flex-row">
         <div className="lg:w-1/2">
           <div className="my-5">
             <RichContent content={data?.twoColumnsText?.[0]?.raw} />
@@ -62,16 +63,10 @@ const Home = ({ data }) => {
         </div>
       </section>
 
-      <section className="container max-w-screen-xl px-4 py-10 mx-auto xl:py-20">
-        <div className="overflow-hidden border rounded-xl xl:rounded-3xl border-neutral-800">
-          <VideoIframe videoId={data?.secondVideo} muted />
-        </div>
-      </section>
-
       {data?.sections?.map((section) => (
         <section
           key={section?.id}
-          className="container flex flex-col justify-between max-w-screen-xl gap-4 px-4 mx-auto lg:py-10 xl:gap-10 lg:flex-row"
+          className="container flex flex-col justify-between hidden max-w-screen-xl gap-4 px-4 mx-auto lg:py-10 xl:gap-10 lg:flex-row"
         >
           <div className="lg:w-1/3">
             <h2 className="font-bold lg:text-4xl">{section?.title}</h2>
@@ -82,36 +77,39 @@ const Home = ({ data }) => {
         </section>
       ))}
 
-      <section className="container flex flex-col justify-between max-w-screen-xl gap-4 px-4 mx-auto mb-10 xl:mb-20 xl:gap-10 lg:flex-row">
-        <div className="lg:w-1/3" />
-        <div className="lg:w-2/3">
-          <h2 className="flex gap-2 py-6 text-xl font-bold lg:gap-4 md:text-4xl lg:me-20">
-            <span className="text-primary-color"> Focus </span>
-            <span>for your </span>
-            <span>
-              <i>creativity</i>
-            </span>
-          </h2>
-          <Link href="/team">
-            <Button className="btn btn-primary group">
-              <span className="mr-2">{t('nav_team_title')}</span>
-              <span className="transition-colors duration-300 text-primary-color group-hover:text-black">
-                <BrandIcon />
-              </span>
-            </Button>
-          </Link>
-        </div>
-      </section>
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={galleryImages}
+        plugins={[Thumbnails]}
+        index={lightboxIndex}
+      />
 
-      <section className="container max-w-screen-xl px-4 mx-auto mb-10">
-        {data?.projects && <ScrollTriggered items={data?.projects} />}
-        <div className="flex justify-center">
-          <Link href="/projects">
-            <Button className="btn btn-primary">
-              {t('view_all_projects')}
-            </Button>
-          </Link>
-        </div>
+      <section
+        className="container max-w-screen-xl px-4 mx-auto my-10"
+        id="gallery"
+      >
+        {galleryImages &&
+          galleryImages.map((image, index) => (
+            <a
+              href="!#"
+              key={image.id}
+              onClick={(e) => {
+                e.preventDefault();
+                setLightboxIndex(index);
+                setLightboxOpen(true);
+              }}
+            >
+              <ScrollTriggered
+                src={image.src}
+                alt={image.alt}
+                width={1440}
+                height={810}
+                position={image.position}
+                index={index + 1}
+              />
+            </a>
+          ))}
       </section>
     </Layout>
   );
