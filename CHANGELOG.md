@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/tavomak/gsd00/compare/v1.1.0...v1.1.1) (2026-02-15)
+
+
+### Bug Fixes
+
+* address code review feedback ([3ec458c](https://github.com/tavomak/gsd00/commit/3ec458cffed0090e526a667600c2ad1f97d8c776))
+
 # [1.1.0](https://github.com/tavomak/gsd00/compare/v1.0.0...v1.1.0) (2026-02-15)
 
 
