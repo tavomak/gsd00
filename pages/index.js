@@ -67,12 +67,14 @@ const Home = ({ data }) => {
       >
         <div className="relative flex items-center justify-end gap-2 mb-6">
           <Button
+            aria-label="Masonry view"
             className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
             onClick={() => setViewMode('masonry')}
           >
             <FaThLarge />
           </Button>
           <Button
+            aria-label="Scroll view"
             className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
             onClick={() => setViewMode('scroll')}
           >
@@ -89,7 +91,7 @@ const Home = ({ data }) => {
             }}
           />
         ) : (
-          <div className="overflow-hidden ">
+          <div className="overflow-hidden">
             {galleryImages &&
               galleryImages.map((image, index) => (
                 <a

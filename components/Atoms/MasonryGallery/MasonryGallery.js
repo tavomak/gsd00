@@ -39,7 +39,6 @@ MasonryGallery.propTypes = {
       id: PropTypes.number.isRequired,
       src: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired,
-      position: PropTypes.string,
     })
   ).isRequired,
   onImageClick: PropTypes.func.isRequired,
