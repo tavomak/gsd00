@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/tavomak/gsd00/compare/v1.0.0...v1.1.0) (2026-02-15)
+
+
+### Features
+
+* add masonry gallery view and fix scroll sticky behavior ([36d4368](https://github.com/tavomak/gsd00/commit/36d4368e6054a242562790c0bc204e328f8c5c81))
+
 # 1.0.0 (2026-02-15)
 
 
