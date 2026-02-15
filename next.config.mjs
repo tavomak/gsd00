@@ -3,7 +3,6 @@ import nextTranslate from 'next-translate-plugin';
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     deviceSizes: [768, 1440],
     imageSizes: [32, 128],

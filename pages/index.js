@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { getPageBySlug } from '@/utils/lib/api';
 
 import Marquee from 'react-fast-marquee';
+import { FaThLarge, FaList } from 'react-icons/fa';
 import Layout from '@/components/Templates/Layout';
 import VideoIframe from '@/components/Atoms/VideoIframe';
-import RichContent from '@/components/Atoms/RichContent';
 import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
+import MasonryGallery from '@/components/Atoms/MasonryGallery';
+import Button from '@/components/Atoms/Button';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/styles.css';
@@ -29,6 +31,7 @@ export async function getStaticProps(context) {
 const Home = ({ data }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [viewMode, setViewMode] = useState('masonry');
   return (
     <Layout
       title={data?.seoMetadata?.title}
@@ -50,33 +53,6 @@ const Home = ({ data }) => {
         </div>
       </section>
 
-      <section className="container flex-col justify-between hidden gap-4 px-4 mx-auto xl:gap-10 lg:flex-row">
-        <div className="lg:w-1/2">
-          <div className="my-5">
-            <RichContent content={data?.twoColumnsText?.[0]?.raw} />
-          </div>
-        </div>
-        <div className="lg:w-1/2">
-          <div className="my-5">
-            <RichContent content={data?.twoColumnsText?.[1]?.raw} />
-          </div>
-        </div>
-      </section>
-
-      {data?.sections?.map((section) => (
-        <section
-          key={section?.id}
-          className="container flex flex-col justify-between hidden max-w-screen-xl gap-4 px-4 mx-auto lg:py-10 xl:gap-10 lg:flex-row"
-        >
-          <div className="lg:w-1/3">
-            <h2 className="font-bold lg:text-4xl">{section?.title}</h2>
-          </div>
-          <div className="lg:w-2/3">
-            <RichContent content={section?.content?.json} />
-          </div>
-        </section>
-      ))}
-
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
@@ -89,27 +65,54 @@ const Home = ({ data }) => {
         className="container max-w-screen-xl px-4 mx-auto my-10"
         id="gallery"
       >
-        {galleryImages &&
-          galleryImages.map((image, index) => (
-            <a
-              href="!#"
-              key={image.id}
-              onClick={(e) => {
-                e.preventDefault();
-                setLightboxIndex(index);
-                setLightboxOpen(true);
-              }}
-            >
-              <ScrollTriggered
-                src={image.src}
-                alt={image.alt}
-                width={1440}
-                height={810}
-                position={image.position}
-                index={index + 1}
-              />
-            </a>
-          ))}
+        <div className="relative flex items-center justify-end gap-2 mb-6">
+          <Button
+            className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
+            onClick={() => setViewMode('masonry')}
+          >
+            <FaThLarge />
+          </Button>
+          <Button
+            className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
+            onClick={() => setViewMode('scroll')}
+          >
+            <FaList />
+          </Button>
+        </div>
+
+        {viewMode === 'masonry' ? (
+          <MasonryGallery
+            images={galleryImages}
+            onImageClick={(index) => {
+              setLightboxIndex(index);
+              setLightboxOpen(true);
+            }}
+          />
+        ) : (
+          <div className="overflow-hidden ">
+            {galleryImages &&
+              galleryImages.map((image, index) => (
+                <a
+                  href="!#"
+                  key={image.id}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setLightboxIndex(index);
+                    setLightboxOpen(true);
+                  }}
+                >
+                  <ScrollTriggered
+                    src={image.src}
+                    alt={image.alt}
+                    width={1440}
+                    height={810}
+                    position={image.position}
+                    index={index + 1}
+                  />
+                </a>
+              ))}
+          </div>
+        )}
       </section>
     </Layout>
   );
