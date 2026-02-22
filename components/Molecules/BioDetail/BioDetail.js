@@ -26,6 +26,7 @@ const BioDetail = ({ item }) => (
           alt={item.name}
           width={250}
           height={250}
+          priority
           className="rounded-xl"
           style={{
             width: '250px',
