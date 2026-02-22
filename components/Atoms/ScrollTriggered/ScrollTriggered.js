@@ -23,7 +23,7 @@ const ScrollTriggered = ({ src, alt, width, height, position, index }) => {
   );
 
   return (
-    <div ref={ref} className="sticky mb-10 top-20 xl:mb-20">
+    <div ref={ref} className="mb-10 xl:mb-20">
       <motion.div
         style={{
           scale,

@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/tavomak/gsd00/compare/v1.1.1...v1.2.0) (2026-02-22)
+
+
+### Features
+
+* ai documentation and gallery scroll indicator ([1c8568f](https://github.com/tavomak/gsd00/commit/1c8568f7d0b04a0874a38e80cfcd1740223c3d22))
+
 ## [1.1.1](https://github.com/tavomak/gsd00/compare/v1.1.0...v1.1.1) (2026-02-15)
 
 

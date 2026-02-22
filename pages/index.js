@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { getPageBySlug } from '@/utils/lib/api';
 
 import Marquee from 'react-fast-marquee';
@@ -6,6 +6,7 @@ import { FaThLarge, FaList } from 'react-icons/fa';
 import Layout from '@/components/Templates/Layout';
 import VideoIframe from '@/components/Atoms/VideoIframe';
 import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
+import GalleryScrollIndicator from '@/components/Atoms/GalleryScrollIndicator';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
 import Button from '@/components/Atoms/Button';
 import Lightbox from 'yet-another-react-lightbox';
@@ -32,6 +33,7 @@ const Home = ({ data }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [viewMode, setViewMode] = useState('masonry');
+  const galleryRef = useRef(null);
   return (
     <Layout
       title={data?.seoMetadata?.title}
@@ -91,17 +93,20 @@ const Home = ({ data }) => {
             }}
           />
         ) : (
-          <div className="overflow-hidden">
+          <div
+            ref={galleryRef}
+            className="container max-w-screen-md mx-auto overflow-visible"
+          >
             {galleryImages &&
               galleryImages.map((image, index) => (
-                <a
-                  href="!#"
+                <button
+                  type="button"
                   key={image.id}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={() => {
                     setLightboxIndex(index);
                     setLightboxOpen(true);
                   }}
+                  className="sticky top-20 w-full text-left"
                 >
                   <ScrollTriggered
                     src={image.src}
@@ -111,9 +116,16 @@ const Home = ({ data }) => {
                     position={image.position}
                     index={index + 1}
                   />
-                </a>
+                </button>
               ))}
           </div>
+        )}
+
+        {viewMode === 'scroll' && (
+          <GalleryScrollIndicator
+            totalItems={galleryImages.length}
+            targetRef={galleryRef}
+          />
         )}
       </section>
     </Layout>
