@@ -19,6 +19,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '83s.cl',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   experimental: {

@@ -10,9 +10,21 @@ export const navItems = [
     children: false,
     visible: true,
   },
+  // {
+  //   label: 'nav_about_title',
+  //   path: '/about',
+  //   children: false,
+  //   visible: true,
+  // },
   {
     label: 'nav_gallery_title',
-    path: '#gallery',
+    path: '/gallery',
+    children: false,
+    visible: true,
+  },
+  {
+    label: 'nav_projects_title',
+    path: '/projects',
     children: false,
     visible: true,
   },

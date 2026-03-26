@@ -4,14 +4,24 @@ import RichContent from '@/components/Atoms/RichContent';
 
 export async function getStaticProps(context) {
   const { locale } = context;
-  const response = await getPageBySlug('terms-conditions', [locale]);
-  const data = response?.data?.page || [];
-  return {
-    props: {
-      data,
-    },
-    revalidate: 100,
-  };
+  try {
+    const response = await getPageBySlug('terms-conditions', [locale]);
+    const data = response?.data?.page || {};
+    return {
+      props: {
+        data,
+      },
+      revalidate: 100,
+    };
+  } catch (error) {
+    console.error('Error fetching terms-conditions page:', error);
+    return {
+      props: {
+        data: {},
+      },
+      revalidate: 100,
+    };
+  }
 }
 
 const TermsConditions = ({ data }) => (

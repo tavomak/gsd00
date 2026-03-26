@@ -17,26 +17,25 @@ const Layout = ({
   className,
   image,
   noPreFooter,
+  noContact,
 }) => {
-  const hostname = typeof window !== 'undefined' ? window.location.href : '';
   const { t, lang } = useTranslation('common');
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [hostname, setHostname] = useState('');
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    setHostname(window.location.href);
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
       if (window.scrollY > 600) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
       }
-    });
+    };
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', () => {
-        if (window.scrollY > 600) {
-          setShowTopBtn(true);
-        } else {
-          setShowTopBtn(false);
-        }
-      });
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
   return (
@@ -140,7 +139,7 @@ const Layout = ({
       </main>
       <ToastContainer />
       {showTopBtn && <GoToTopButton />}
-      <Footer noPreFooter={noPreFooter} />
+      <Footer noPreFooter={noPreFooter} noContact={noContact} />
       {schema && (
         // eslint-disable-next-line
         <Script
