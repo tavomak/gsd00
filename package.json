@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.0",
+    "@apollo/client": "~3.13.0",
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
     "@emailjs/browser": "^4.4.1",
     "@graphcms/rich-text-react-renderer": "^0.6.2",
     "@next/third-parties": "^15.2.4",
+    "dompurify": "^3.3.3",
     "motion": "^11.15.0",
     "next": "15.0.4",
     "next-nprogress-bar": "^2.3.15",

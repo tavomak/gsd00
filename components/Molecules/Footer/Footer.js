@@ -5,7 +5,7 @@ import { FaInstagram } from 'react-icons/fa6';
 import { siteName, socialMedia } from '@/utils/constants';
 import BrandIcon from '@/components/Atoms/BrandIcon/BrandIcon';
 
-const Footer = ({ noPreFooter }) => {
+const Footer = ({ noPreFooter, noContact }) => {
   const { t } = useTranslation('common');
   return (
     <footer className="text-white">
@@ -15,13 +15,15 @@ const Footer = ({ noPreFooter }) => {
         >
           <h2 className="text-[6vw] md:text-[40px] lg:text-[50px] font-bold">
             <span>Free Style </span>
-            <span className="text-primary-color">Photography</span>
+            <span className="text-primary-color">Branded Content</span>
           </h2>
           <p className="text-[20px] md:text-[30px] lg:text-[40px] font-bold">
             Let&apos;s | Work
           </p>
         </div>
-        <div className="flex flex-col items-center gap-12 text-white">
+        <div
+          className={`${noContact ? 'hidden' : 'flex'} flex-col items-center gap-12 text-white`}
+        >
           <Link href="/contact">
             <Button className="btn btn-primary group">
               {t('nav_contact_title')}

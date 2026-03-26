@@ -1,11 +1,8 @@
 import { useState, useRef } from 'react';
 import { getPageBySlug } from '@/utils/lib/api';
-import Link from 'next/link';
-import useTranslation from 'next-translate/useTranslation';
 import Marquee from '@/components/Molecules/Marquee';
 import { FaThLarge, FaList } from 'react-icons/fa';
 import Layout from '@/components/Templates/Layout';
-import VideoIframe from '@/components/Atoms/VideoIframe';
 import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
 import GalleryScrollIndicator from '@/components/Atoms/GalleryScrollIndicator';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
@@ -17,12 +14,10 @@ import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 import { galleryImages } from '@/utils';
 
-const gallerySample = galleryImages.filter((item, key) => key < 6);
-
 export async function getStaticProps(context) {
   const { locale } = context;
   try {
-    const response = await getPageBySlug('home', [locale]);
+    const response = await getPageBySlug('gallery', [locale]);
     const data = response?.data?.page || {};
     return {
       props: {
@@ -31,7 +26,7 @@ export async function getStaticProps(context) {
       revalidate: 100,
     };
   } catch (error) {
-    console.error('Error fetching home page:', error);
+    console.error('Error fetching gallery page:', error);
     return {
       props: {
         data: {},
@@ -41,12 +36,11 @@ export async function getStaticProps(context) {
   }
 }
 
-const Home = ({ data }) => {
+const Gallery = ({ data }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [viewMode, setViewMode] = useState('masonry');
   const galleryRef = useRef(null);
-  const { t } = useTranslation('common');
   return (
     <Layout
       title={data?.seoMetadata?.title}
@@ -57,16 +51,10 @@ const Home = ({ data }) => {
         <Marquee />
       </section>
 
-      <section className="container max-w-screen-xl mx-auto">
-        <div className="mx-4 overflow-hidden border border-neutral-800">
-          <VideoIframe videoId="1031092352" controls muted />
-        </div>
-      </section>
-
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={gallerySample}
+        slides={galleryImages}
         plugins={[Thumbnails]}
         index={lightboxIndex}
       />
@@ -94,7 +82,7 @@ const Home = ({ data }) => {
 
         {viewMode === 'masonry' ? (
           <MasonryGallery
-            images={gallerySample}
+            images={galleryImages}
             onImageClick={(index) => {
               setLightboxIndex(index);
               setLightboxOpen(true);
@@ -105,8 +93,8 @@ const Home = ({ data }) => {
             ref={galleryRef}
             className="container max-w-screen-md mx-auto overflow-visible"
           >
-            {gallerySample &&
-              gallerySample.map((image, index) => (
+            {galleryImages &&
+              galleryImages.map((image, index) => (
                 <button
                   type="button"
                   key={image.id}
@@ -131,21 +119,13 @@ const Home = ({ data }) => {
 
         {viewMode === 'scroll' && (
           <GalleryScrollIndicator
-            totalItems={gallerySample.length}
+            totalItems={galleryImages.length}
             targetRef={galleryRef}
           />
         )}
-      </section>
-
-      <section className="flex justify-center my-10">
-        <Link href="/gallery">
-          <Button className="btn btn-primary group">
-            {t('nav_go_to_gallery_title')}
-          </Button>
-        </Link>
       </section>
     </Layout>
   );
 };
 
-export default Home;
+export default Gallery;
