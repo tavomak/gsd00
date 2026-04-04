@@ -1,11 +1,12 @@
 import { getProjects, siteUrl } from '@/utils';
+import { GET_PROJECTS } from '@/utils/queries/hygraph';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 
 const sitemapBlog = async (req, res) => {
   const {
     data: { projects },
-  } = await getProjects(['en']);
+  } = await getProjects(GET_PROJECTS, ['en']);
 
   const baseUrl = siteUrl;
 

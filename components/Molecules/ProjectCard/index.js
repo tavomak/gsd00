@@ -7,11 +7,11 @@ const ProjectCard = ({ project, lang }) => (
     href={`${lang === 'es' ? '' : '/en'}/projects/${project?.slug}`}
     className="relative block overflow-hidden border rounded-xl border-neutral-800 group"
   >
-    <div className="relative w-full aspect-[4/3]">
+    <div className="relative w-full aspect-[16/9]">
       <Image
         src={
-          project?.proyectosBackground?.gifPortada?.node?.mediaItemUrl ||
-          project?.featuredImage?.node?.mediaItemUrl ||
+          project?.seoMetadata?.seoImage?.url ||
+          project?.primaryImage?.url ||
           '/assets/default_project_image.jpg'
         }
         alt={project?.title?.replace(/<[^>]*>/g, '')}
@@ -26,10 +26,7 @@ const ProjectCard = ({ project, lang }) => (
       whileHover={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
     >
-      <h3
-        className="text-xl font-bold text-white"
-        dangerouslySetInnerHTML={{ __html: project?.title }}
-      />
+      <h3 className="text-xl font-bold text-white">{project?.title}</h3>
       {project?.description && (
         <p className="mt-1 text-sm text-neutral-300 line-clamp-2">
           {project.description}
@@ -43,7 +40,7 @@ const ProjectCard = ({ project, lang }) => (
     </motion.div>
     <div className="p-4 border-t md:hidden border-neutral-800">
       <h3 className="text-base font-bold transition-colors duration-300 group-hover:text-primary-color">
-        <span dangerouslySetInnerHTML={{ __html: project?.title }} />
+        {project.title}
       </h3>
     </div>
   </Link>

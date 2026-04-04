@@ -2,7 +2,9 @@
 
 ## Required (All in .env.local)
 ```
-NEXT_PUBLIC_CMS_API_URL           # GraphCMS endpoint
+NEXT_PUBLIC_CMS_API_URL           # Hygraph GraphQL endpoint
+NEXT_PUBLIC_WP_API_URL            # WordPress GraphQL endpoint
+HYGRAPH_TOKEN                     # Server-only Hygraph auth token
 NEXT_PUBLIC_EMAIL_JS_SERVICE_ID   # EmailJS
 NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID
 NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY

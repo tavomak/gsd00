@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { getPageBySlug } from '@/utils/lib/api';
+import { galleryImages, getPageBySlug } from '@/utils';
+import { GET_PAGE_HOME } from '@/utils/queries/hygraph';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import Marquee from '@/components/Molecules/Marquee';
@@ -15,14 +16,12 @@ import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-import { galleryImages } from '@/utils';
-
 const gallerySample = galleryImages.filter((item, key) => key < 6);
 
 export async function getStaticProps(context) {
   const { locale } = context;
   try {
-    const response = await getPageBySlug('home', [locale]);
+    const response = await getPageBySlug(GET_PAGE_HOME, 'home', [locale]);
     const data = response?.data?.page || {};
     return {
       props: {

@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { getPageBySlug } from '@/utils/lib/api';
+import { getPageBySlug, galleryImages } from '@/utils';
+import { GET_PAGE_GALLERY } from '@/utils/queries/hygraph';
 import Marquee from '@/components/Molecules/Marquee';
 import { FaThLarge, FaList } from 'react-icons/fa';
 import Layout from '@/components/Templates/Layout';
@@ -12,12 +13,10 @@ import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-import { galleryImages } from '@/utils';
-
 export async function getStaticProps(context) {
   const { locale } = context;
   try {
-    const response = await getPageBySlug('gallery', [locale]);
+    const response = await getPageBySlug(GET_PAGE_GALLERY, 'gallery', [locale]);
     const data = response?.data?.page || {};
     return {
       props: {

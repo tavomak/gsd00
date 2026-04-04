@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import Layout from '@/components/Templates/Layout';
 import Marquee from '@/components/Molecules/Marquee';
-import VideoIframe from '@/components/Atoms/VideoIframe';
-
-import { getWpProjects, getWpProjectById, rateLimit } from '@/utils';
+import RichContent from '@/components/Atoms/RichContent';
+import {
+  getProjects,
+  getProjectBySlug,
+  rateLimit,
+  GET_PROJECT_BY_SLUG,
+  GET_PROJECTS,
+} from '@/utils';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
@@ -14,8 +19,10 @@ export async function getStaticProps({ params, locale }) {
   await rateLimit();
   const { slug } = params;
   try {
-    const response = await getWpProjectById(slug, [locale]);
-    const data = response?.data?.proyecto || {};
+    const response = await getProjectBySlug(GET_PROJECT_BY_SLUG, slug, [
+      locale,
+    ]);
+    const data = response?.data?.project || {};
     return {
       props: {
         data,
@@ -33,11 +40,14 @@ export async function getStaticProps({ params, locale }) {
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales, defaultLocale }) {
   await rateLimit();
   try {
-    const projectsResponse = await getWpProjects();
-    const projects = projectsResponse?.data?.proyectos?.nodes || [];
+    const projectsResponse = await getProjects(
+      GET_PROJECTS,
+      locales ?? [defaultLocale]
+    );
+    const projects = projectsResponse?.data?.projects || [];
     return {
       paths: projects.map((project) => ({
         params: { slug: project.slug },
@@ -54,9 +64,9 @@ export async function getStaticPaths() {
 }
 
 const getFormattedMedia = (mediaNodes) =>
-  mediaNodes.map((node) => ({
+  (mediaNodes || []).map((node) => ({
     id: node.id,
-    src: node.mediaItemUrl,
+    src: node.url,
     alt: node.title || 'Project Image',
   }));
 
@@ -76,52 +86,34 @@ const Project = ({ data }) => {
         plugins={[Thumbnails]}
         index={lightboxIndex}
       />
+      <section className="mb-20 text-black bg-primary-color">
+        <Marquee />
+      </section>
       <section className="py-6 overflow-x-hidden lg:py-10">
-        <Marquee speed={200}>
-          <h2 className="flex gap-4 py-6 text-6xl font-bold 2xl:text-9xl me-20">
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: data?.title }}
-            />
+        <Marquee direction="right" speed={40}>
+          <h2 className="flex gap-4 py-6 text-6xl font-bold me-20">
+            {data?.title}
           </h2>
         </Marquee>
       </section>
-      {data?.proyectos?.secciones?.map((section) => (
-        <section
-          key={section.tipoDeContenido}
-          className="container max-w-screen-xl mx-auto py-14"
-        >
-          {section?.video && (
-            <div className="mx-4 overflow-hidden border rounded-xl xl:rounded-3xl border-neutral-800">
-              <VideoIframe videoId={section?.video} controls muted />
-            </div>
-          )}
-          {section?.galeria?.nodes?.length > 0 && (
-            <button
-              type="button"
-              className="w-full text-left"
-              onClick={() => {
-                setGallerySample(getFormattedMedia(section.galeria.nodes));
-                setLightboxOpen(true);
-              }}
-            >
-              <MasonryGallery
-                key={section.tipoDeContenido}
-                images={getFormattedMedia(section.galeria.nodes)}
-                onImageClick={(imgIndex) => {
-                  setLightboxIndex(imgIndex);
-                }}
-              />
-            </button>
-          )}
-          {section?.mixto && (
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: section.mixto }}
-            />
-          )}
+      {data?.gallery?.length > 0 && (
+        <section className="container max-w-screen-xl px-4 mx-auto py-14 lg:px-0">
+          <MasonryGallery
+            images={getFormattedMedia(data.gallery)}
+            onImageClick={(imgIndex) => {
+              setGallerySample(getFormattedMedia(data.gallery));
+              setLightboxIndex(imgIndex);
+              setLightboxOpen(true);
+            }}
+          />
         </section>
-      ))}
+      )}
+      {data?.description?.raw && (
+        <section className="container max-w-screen-xl px-4 mx-auto py-14 lg:px-0">
+          <h3 className="mb-6 text-xl font-bold">{data?.title}</h3>
+          <RichContent content={data.description.raw} />
+        </section>
+      )}
     </Layout>
   );
 };

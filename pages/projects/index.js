@@ -2,16 +2,23 @@ import useTranslation from 'next-translate/useTranslation';
 import Layout from '@/components/Templates/Layout';
 import Marquee from '@/components/Molecules/Marquee';
 import ProjectCard from '@/components/Molecules/ProjectCard';
-import { getPageBySlug, getWpProjects, rateLimit } from '@/utils';
+import {
+  getPageBySlug,
+  getProjects,
+  rateLimit,
+  GET_PROJECTS,
+  GET_PAGE_PROJECTS,
+} from '@/utils';
 
 export async function getStaticProps({ locale }) {
   await rateLimit();
   try {
-    const pageResponse = await getPageBySlug('projects', [locale]);
+    const pageResponse = await getPageBySlug(GET_PAGE_PROJECTS, 'projects', [
+      locale,
+    ]);
     const data = pageResponse?.data?.page || {};
-    const projectsResponse = await getWpProjects();
-    const projects = projectsResponse?.data?.proyectos?.nodes || [];
-
+    const projectsResponse = await getProjects(GET_PROJECTS, [locale]);
+    const projects = projectsResponse?.data?.projects || [];
     return {
       props: {
         data,
@@ -43,9 +50,13 @@ const Projects = ({ data, projects }) => {
       </section>
       <section className="container max-w-screen-xl px-4 mx-auto">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 ">
-          {projects.map((project) => (
-            <ProjectCard key={project?.id} project={project} lang={lang} />
-          ))}
+          {projects
+            .filter((project) =>
+              project.categories?.some((cat) => cat === 'photography')
+            )
+            .map((project) => (
+              <ProjectCard key={project?.id} project={project} lang={lang} />
+            ))}
         </div>
       </section>
     </Layout>

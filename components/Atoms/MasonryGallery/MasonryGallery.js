@@ -10,7 +10,7 @@ const MasonryGallery = ({ images, onImageClick }) => (
           key={image.id}
           type="button"
           onClick={() => onImageClick(index)}
-          className="block w-full mb-4 overflow-hidden transition-transform duration-300 border border-neutral-800 break-inside-avoid hover:scale-105"
+          className="block w-full mb-4 overflow-hidden transition-transform duration-300 border rounded-xl border-neutral-800 break-inside-avoid hover:scale-105"
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -27,6 +27,7 @@ const MasonryGallery = ({ images, onImageClick }) => (
             height={600}
             className="w-full h-auto"
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            priority
           />
         </motion.button>
       ))}

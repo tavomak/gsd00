@@ -3,11 +3,12 @@ import Layout from '@/components/Templates/Layout';
 import Marquee from '@/components/Molecules/Marquee';
 import ContactForm from '@/components/Molecules/ContactForm';
 import { getPageBySlug, siteName } from '@/utils';
+import { GET_PAGE_CONTACT } from '@/utils/queries/hygraph';
 
 export async function getStaticProps(context) {
   const { locale } = context;
   try {
-    const response = await getPageBySlug('contact', [locale]);
+    const response = await getPageBySlug(GET_PAGE_CONTACT, 'contact', [locale]);
     const data = response?.data?.page || {};
     return {
       props: {
@@ -28,8 +29,8 @@ export async function getStaticProps(context) {
 
 const Contact = ({ data }) => (
   <Layout
-    title={data?.seoMetaData?.title}
-    description={data?.seoMetaData?.description}
+    title={data?.seoMetadata?.title}
+    description={data?.seoMetadata?.seoDescription}
     noPreFooter
     noContact
   >
