@@ -1,14 +1,29 @@
 ---
 name: next-best-practices
-description: Next.js best practices - data patterns, async APIs, metadata, image/font optimization, bundling
+description: Next.js best practices - file conventions, RSC boundaries, data patterns, async APIs, metadata, error handling, route handlers, image/font optimization, bundling
 user-invocable: false
 ---
 
 # Next.js Best Practices
 
-> Pages Router project — RSC/App Router sections do not apply
-
 Apply these rules when writing or reviewing Next.js code.
+
+## File Conventions
+
+See [file-conventions.md](./file-conventions.md) for:
+- Project structure and special files
+- Route segments (dynamic, catch-all, groups)
+- Parallel and intercepting routes
+- Middleware rename in v16 (middleware → proxy)
+
+## RSC Boundaries
+
+Detect invalid React Server Component patterns.
+
+See [rsc-boundaries.md](./rsc-boundaries.md) for:
+- Async client component detection (invalid)
+- Non-serializable props detection
+- Server Action exceptions
 
 ## Async Patterns
 
@@ -25,6 +40,12 @@ See [runtime-selection.md](./runtime-selection.md) for:
 - Default to Node.js runtime
 - When Edge runtime is appropriate
 
+## Directives
+
+See [directives.md](./directives.md) for:
+- `'use client'`, `'use server'` (React)
+- `'use cache'` (Next.js)
+
 ## Functions
 
 See [functions.md](./functions.md) for:
@@ -32,12 +53,28 @@ See [functions.md](./functions.md) for:
 - Server functions: `cookies`, `headers`, `draftMode`, `after`
 - Generate functions: `generateStaticParams`, `generateMetadata`
 
+## Error Handling
+
+See [error-handling.md](./error-handling.md) for:
+- `error.tsx`, `global-error.tsx`, `not-found.tsx`
+- `redirect`, `permanentRedirect`, `notFound`
+- `forbidden`, `unauthorized` (auth errors)
+- `unstable_rethrow` for catch blocks
+
 ## Data Patterns
 
 See [data-patterns.md](./data-patterns.md) for:
 - Server Components vs Server Actions vs Route Handlers
 - Avoiding data waterfalls (`Promise.all`, Suspense, preload)
 - Client component data fetching
+
+## Route Handlers
+
+See [route-handlers.md](./route-handlers.md) for:
+- `route.ts` basics
+- GET handler conflicts with `page.tsx`
+- Environment behavior (no React DOM)
+- When to use vs Server Actions
 
 ## Metadata & OG Images
 
@@ -93,6 +130,13 @@ See [hydration-error.md](./hydration-error.md) for:
 See [suspense-boundaries.md](./suspense-boundaries.md) for:
 - CSR bailout with `useSearchParams` and `usePathname`
 - Which hooks require Suspense boundaries
+
+## Parallel & Intercepting Routes
+
+See [parallel-routes.md](./parallel-routes.md) for:
+- Modal patterns with `@slot` and `(.)` interceptors
+- `default.tsx` for fallbacks
+- Closing modals correctly with `router.back()`
 
 ## Self-Hosting
 

@@ -6,10 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 import Marquee from '@/components/Molecules/Marquee';
 import { FaThLarge, FaList } from 'react-icons/fa';
 import Layout from '@/components/Templates/Layout';
-import VideoIframe from '@/components/Atoms/VideoIframe';
+import ImageGalleryCarousel from '@/components/Molecules/ImageGalleryCarousel';
 import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
 import GalleryScrollIndicator from '@/components/Atoms/GalleryScrollIndicator';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
+import StickyTwoColumn from '@/components/Molecules/StickyTwoColumn';
 import Button from '@/components/Atoms/Button';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
@@ -45,7 +46,7 @@ const Home = ({ data }) => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [viewMode, setViewMode] = useState('masonry');
   const galleryRef = useRef(null);
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   return (
     <Layout
       title={data?.seoMetadata?.title}
@@ -57,8 +58,21 @@ const Home = ({ data }) => {
       </section>
 
       <section className="container max-w-screen-xl mx-auto">
-        <div className="mx-4 overflow-hidden border border-neutral-800">
-          <VideoIframe videoId="1031092352" controls muted />
+        <div className="mx-4">
+          <ImageGalleryCarousel
+            items={(data.homeProjects || []).slice(0, 4).map((project) => ({
+              id: project.id,
+              src:
+                project.seoMetadata?.seoImage?.url || project.primaryImage?.url,
+              alt: project.title,
+              title: project.title,
+              href: `${lang === 'es' ? '' : '/en'}/projects/${project.slug}`,
+            }))}
+            autoplay
+            loop
+            showArrows
+            showDots
+          />
         </div>
       </section>
 
@@ -142,6 +156,19 @@ const Home = ({ data }) => {
             {t('nav_go_to_gallery_title')}
           </Button>
         </Link>
+      </section>
+
+      <section className="container max-w-screen-xl px-4 mx-auto my-16">
+        <StickyTwoColumn
+          items={(data.homeProjects || []).slice(0, 4).map((project) => ({
+            id: project.id,
+            src: project.primaryImage?.url,
+            alt: project.title,
+            title: project.title,
+            description: project.description,
+            href: `https://83s.cl/proyectos/${project.slug}`,
+          }))}
+        />
       </section>
     </Layout>
   );

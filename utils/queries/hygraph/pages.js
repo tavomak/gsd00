@@ -18,9 +18,15 @@ export const GET_PAGE_HOME = gql`
       homeProjects(locales: $locales) {
         ... on Project {
           id
+          slug
           categories
           primaryImage {
             url
+          }
+          seoMetadata {
+            seoImage {
+              url
+            }
           }
           title
         }

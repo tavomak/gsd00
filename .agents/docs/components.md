@@ -8,7 +8,7 @@ components/
 │               GalleryScrollIndicator
 ├── Molecules/  Card, ContactForm, BioDetail, Navbar, DesktopNavigation,
 │               MobileNavigation, Footer, GoToTopButton, Marquee, ProjectCard
-└── Templates/  Layout, Modal, terms-conditions, about
+└── Templates/  Layout, Modal, about
 ```
 
 ## Props
