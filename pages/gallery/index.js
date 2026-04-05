@@ -8,6 +8,7 @@ import ScrollTriggered from '@/components/Atoms/ScrollTriggered';
 import GalleryScrollIndicator from '@/components/Atoms/GalleryScrollIndicator';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
 import Button from '@/components/Atoms/Button';
+import FadeIn from '@/components/Atoms/FadeIn';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/styles.css';
@@ -62,66 +63,68 @@ const Gallery = ({ data }) => {
         className="container max-w-screen-xl px-4 mx-auto my-10"
         id="gallery"
       >
-        <div className="relative flex items-center justify-end gap-2 mb-6">
-          <Button
-            aria-label="Masonry view"
-            className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
-            onClick={() => setViewMode('masonry')}
-          >
-            <FaThLarge />
-          </Button>
-          <Button
-            aria-label="Scroll view"
-            className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
-            onClick={() => setViewMode('scroll')}
-          >
-            <FaList />
-          </Button>
-        </div>
-
-        {viewMode === 'masonry' ? (
-          <MasonryGallery
-            images={galleryImages}
-            onImageClick={(index) => {
-              setLightboxIndex(index);
-              setLightboxOpen(true);
-            }}
-          />
-        ) : (
-          <div
-            ref={galleryRef}
-            className="container max-w-screen-md mx-auto overflow-visible"
-          >
-            {galleryImages &&
-              galleryImages.map((image, index) => (
-                <button
-                  type="button"
-                  key={image.id}
-                  onClick={() => {
-                    setLightboxIndex(index);
-                    setLightboxOpen(true);
-                  }}
-                  className="sticky w-full text-left top-20"
-                >
-                  <ScrollTriggered
-                    src={image.src}
-                    alt={image.alt}
-                    width={1440}
-                    height={810}
-                    position={image.position}
-                    index={index + 1}
-                  />
-                </button>
-              ))}
+        <FadeIn>
+          <div className="relative flex items-center justify-end gap-2 mb-6">
+            <Button
+              aria-label="Masonry view"
+              className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
+              onClick={() => setViewMode('masonry')}
+            >
+              <FaThLarge />
+            </Button>
+            <Button
+              aria-label="Scroll view"
+              className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
+              onClick={() => setViewMode('scroll')}
+            >
+              <FaList />
+            </Button>
           </div>
-        )}
 
-        {viewMode === 'scroll' && (
-          <GalleryScrollIndicator
-            totalItems={galleryImages.length}
-            targetRef={galleryRef}
-          />
-        )}
+          {viewMode === 'masonry' ? (
+            <MasonryGallery
+              images={galleryImages}
+              onImageClick={(index) => {
+                setLightboxIndex(index);
+                setLightboxOpen(true);
+              }}
+            />
+          ) : (
+            <div
+              ref={galleryRef}
+              className="container max-w-screen-md mx-auto overflow-visible"
+            >
+              {galleryImages &&
+                galleryImages.map((image, index) => (
+                  <button
+                    type="button"
+                    key={image.id}
+                    onClick={() => {
+                      setLightboxIndex(index);
+                      setLightboxOpen(true);
+                    }}
+                    className="sticky w-full text-left top-20"
+                  >
+                    <ScrollTriggered
+                      src={image.src}
+                      alt={image.alt}
+                      width={1440}
+                      height={810}
+                      position={image.position}
+                      index={index + 1}
+                    />
+                  </button>
+                ))}
+            </div>
+          )}
+
+          {viewMode === 'scroll' && (
+            <GalleryScrollIndicator
+              totalItems={galleryImages.length}
+              targetRef={galleryRef}
+            />
+          )}
+        </FadeIn>
       </section>
     </Layout>
   );

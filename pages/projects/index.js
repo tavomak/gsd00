@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Layout from '@/components/Templates/Layout';
 import Marquee from '@/components/Molecules/Marquee';
 import ProjectCard from '@/components/Molecules/ProjectCard';
+import FadeIn from '@/components/Atoms/FadeIn';
 import {
   getPageBySlug,
   getProjects,
@@ -49,15 +50,17 @@ const Projects = ({ data, projects }) => {
         <Marquee />
       </section>
       <section className="container max-w-screen-xl px-4 mx-auto">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 ">
-          {projects
-            .filter((project) =>
-              project.categories?.some((cat) => cat === 'photography')
-            )
-            .map((project) => (
-              <ProjectCard key={project?.id} project={project} lang={lang} />
-            ))}
-        </div>
+        <FadeIn>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 ">
+            {projects
+              .filter((project) =>
+                project.categories?.some((cat) => cat === 'photography')
+              )
+              .map((project) => (
+                <ProjectCard key={project?.id} project={project} lang={lang} />
+              ))}
+          </div>
+        </FadeIn>
       </section>
     </Layout>
   );

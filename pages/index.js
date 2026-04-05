@@ -14,6 +14,7 @@ import StickyTwoColumn from '@/components/Molecules/StickyTwoColumn';
 import Button from '@/components/Atoms/Button';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import FadeIn from '@/components/Atoms/FadeIn';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
@@ -58,22 +59,25 @@ const Home = ({ data }) => {
       </section>
 
       <section className="container max-w-screen-xl mx-auto">
-        <div className="mx-4">
-          <ImageGalleryCarousel
-            items={(data.homeProjects || []).slice(0, 4).map((project) => ({
-              id: project.id,
-              src:
-                project.seoMetadata?.seoImage?.url || project.primaryImage?.url,
-              alt: project.title,
-              title: project.title,
-              href: `${lang === 'es' ? '' : '/en'}/projects/${project.slug}`,
-            }))}
-            autoplay
-            loop
-            showArrows
-            showDots
-          />
-        </div>
+        <FadeIn>
+          <div className="mx-4">
+            <ImageGalleryCarousel
+              items={(data.homeProjects || []).slice(0, 4).map((project) => ({
+                id: project.id,
+                src:
+                  project.seoMetadata?.seoImage?.url ||
+                  project.primaryImage?.url,
+                alt: project.title,
+                title: project.title,
+                href: `${lang === 'es' ? '' : '/en'}/projects/${project.slug}`,
+              }))}
+              autoplay
+              loop
+              showArrows
+              showDots
+            />
+          </div>
+        </FadeIn>
       </section>
 
       <Lightbox
@@ -88,87 +92,93 @@ const Home = ({ data }) => {
         className="container max-w-screen-xl px-4 mx-auto my-10"
         id="gallery"
       >
-        <div className="relative flex items-center justify-end gap-2 mb-6">
-          <Button
-            aria-label="Masonry view"
-            className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
-            onClick={() => setViewMode('masonry')}
-          >
-            <FaThLarge />
-          </Button>
-          <Button
-            aria-label="Scroll view"
-            className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
-            onClick={() => setViewMode('scroll')}
-          >
-            <FaList />
-          </Button>
-        </div>
-
-        {viewMode === 'masonry' ? (
-          <MasonryGallery
-            images={gallerySample}
-            onImageClick={(index) => {
-              setLightboxIndex(index);
-              setLightboxOpen(true);
-            }}
-          />
-        ) : (
-          <div
-            ref={galleryRef}
-            className="container max-w-screen-md mx-auto overflow-visible"
-          >
-            {gallerySample &&
-              gallerySample.map((image, index) => (
-                <button
-                  type="button"
-                  key={image.id}
-                  onClick={() => {
-                    setLightboxIndex(index);
-                    setLightboxOpen(true);
-                  }}
-                  className="sticky w-full text-left top-20"
-                >
-                  <ScrollTriggered
-                    src={image.src}
-                    alt={image.alt}
-                    width={1440}
-                    height={810}
-                    position={image.position}
-                    index={index + 1}
-                  />
-                </button>
-              ))}
+        <FadeIn>
+          <div className="relative flex items-center justify-end gap-2 mb-6">
+            <Button
+              aria-label="Masonry view"
+              className={`btn ${viewMode === 'masonry' ? 'btn-primary' : 'border border-neutral-600'}`}
+              onClick={() => setViewMode('masonry')}
+            >
+              <FaThLarge />
+            </Button>
+            <Button
+              aria-label="Scroll view"
+              className={`btn ${viewMode === 'scroll' ? 'btn-primary' : 'border border-neutral-600'}`}
+              onClick={() => setViewMode('scroll')}
+            >
+              <FaList />
+            </Button>
           </div>
-        )}
 
-        {viewMode === 'scroll' && (
-          <GalleryScrollIndicator
-            totalItems={gallerySample.length}
-            targetRef={galleryRef}
-          />
-        )}
+          {viewMode === 'masonry' ? (
+            <MasonryGallery
+              images={gallerySample}
+              onImageClick={(index) => {
+                setLightboxIndex(index);
+                setLightboxOpen(true);
+              }}
+            />
+          ) : (
+            <div
+              ref={galleryRef}
+              className="container max-w-screen-md mx-auto overflow-visible"
+            >
+              {gallerySample &&
+                gallerySample.map((image, index) => (
+                  <button
+                    type="button"
+                    key={image.id}
+                    onClick={() => {
+                      setLightboxIndex(index);
+                      setLightboxOpen(true);
+                    }}
+                    className="sticky w-full text-left top-20"
+                  >
+                    <ScrollTriggered
+                      src={image.src}
+                      alt={image.alt}
+                      width={1440}
+                      height={810}
+                      position={image.position}
+                      index={index + 1}
+                    />
+                  </button>
+                ))}
+            </div>
+          )}
+
+          {viewMode === 'scroll' && (
+            <GalleryScrollIndicator
+              totalItems={gallerySample.length}
+              targetRef={galleryRef}
+            />
+          )}
+        </FadeIn>
       </section>
 
       <section className="flex justify-center my-10">
-        <Link href="/gallery">
-          <Button className="btn btn-primary group">
-            {t('nav_go_to_gallery_title')}
-          </Button>
-        </Link>
+        <FadeIn>
+          <Link href="/gallery">
+            <Button className="btn btn-primary group">
+              {t('nav_go_to_gallery_title')}
+            </Button>
+          </Link>
+        </FadeIn>
       </section>
 
       <section className="container max-w-screen-xl px-4 mx-auto my-16">
-        <StickyTwoColumn
-          items={(data.homeProjects || []).slice(0, 4).map((project) => ({
-            id: project.id,
-            src: project.primaryImage?.url,
-            alt: project.title,
-            title: project.title,
-            description: project.description,
-            href: `https://83s.cl/proyectos/${project.slug}`,
-          }))}
-        />
+        <FadeIn>
+          <StickyTwoColumn
+            items={(data.homeProjects || []).slice(0, 4).map((project) => ({
+              id: project.id,
+              src: project.primaryImage?.url,
+              alt: project.title,
+              title: project.title,
+              description: project.description,
+              href: `https://83s.cl/proyectos/${project.slug}`,
+            }))}
+          />
+        </FadeIn>
       </section>
     </Layout>
   );

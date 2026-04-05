@@ -3,6 +3,7 @@ import Layout from '@/components/Templates/Layout';
 import { getPageBySlug } from '@/utils';
 import { GET_PAGE_ABOUT } from '@/utils/queries/hygraph';
 import RichContent from '@/components/Atoms/RichContent';
+import FadeIn from '@/components/Atoms/FadeIn';
 
 export async function getStaticProps(context) {
   const { locale } = context;
@@ -31,7 +32,7 @@ const AboutPage = ({ data }) => (
     title={data?.seoMetadata?.title}
     description={data?.seoMetadata?.seoDescription}
   >
-    <div className="container max-w-screen-xl mx-auto px-4 py-16">
+    <FadeIn className="container max-w-screen-xl px-4 py-16 mx-auto">
       {data?.title && (
         <h1 className="mb-10 text-5xl font-bold">{data.title}</h1>
       )}
@@ -46,13 +47,13 @@ const AboutPage = ({ data }) => (
               alt={data.title || ''}
               width={data.seoMetadata.seoImage.width || 800}
               height={data.seoMetadata.seoImage.height || 600}
-              className="w-full rounded-xl object-cover"
+              className="object-cover w-full rounded-xl"
               priority
             />
           </div>
         )}
       </div>
-    </div>
+    </FadeIn>
   </Layout>
 );
 

@@ -10,6 +10,7 @@ import {
   GET_PROJECTS,
 } from '@/utils';
 import MasonryGallery from '@/components/Atoms/MasonryGallery';
+import FadeIn from '@/components/Atoms/FadeIn';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/styles.css';
@@ -98,20 +99,24 @@ const Project = ({ data }) => {
       </section>
       {data?.gallery?.length > 0 && (
         <section className="container max-w-screen-xl px-4 mx-auto py-14 lg:px-0">
-          <MasonryGallery
-            images={getFormattedMedia(data.gallery)}
-            onImageClick={(imgIndex) => {
-              setGallerySample(getFormattedMedia(data.gallery));
-              setLightboxIndex(imgIndex);
-              setLightboxOpen(true);
-            }}
-          />
+          <FadeIn>
+            <MasonryGallery
+              images={getFormattedMedia(data.gallery)}
+              onImageClick={(imgIndex) => {
+                setGallerySample(getFormattedMedia(data.gallery));
+                setLightboxIndex(imgIndex);
+                setLightboxOpen(true);
+              }}
+            />
+          </FadeIn>
         </section>
       )}
       {data?.description?.raw && (
         <section className="container max-w-screen-xl px-4 mx-auto py-14 lg:px-0">
-          <h3 className="mb-6 text-xl font-bold">{data?.title}</h3>
-          <RichContent content={data.description.raw} />
+          <FadeIn>
+            <h3 className="mb-6 text-xl font-bold">{data?.title}</h3>
+            <RichContent content={data.description.raw} />
+          </FadeIn>
         </section>
       )}
     </Layout>
