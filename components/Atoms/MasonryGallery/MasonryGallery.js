@@ -61,7 +61,7 @@ const MasonryGallery = ({ images, onImageClick }) => {
 MasonryGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       src: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired,
     })
