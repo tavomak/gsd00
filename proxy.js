@@ -16,7 +16,7 @@ function isMigrated(pathname) {
   return [...MIGRATED].some((p) => p !== '/' && pathname.startsWith(`${p}/`));
 }
 
-export function middleware(req) {
+export function proxy(req) {
   const host = req.headers.get('host') || '';
   const site = siteFromHost(host);
   const url = req.nextUrl.clone();
