@@ -70,8 +70,10 @@ export const sites = {
 };
 
 export const HOST_PATTERNS = [
-  { site: '83s', pattern: '(^|\\.)83s(\\.|$)' },
-  { site: 'gsd00', pattern: '(^|\\.)gsd00(\\.|$)' },
+  // Match the site token as a label prefix so real domains resolve:
+  // 83scontent.com -> 83s, gsd00.com -> gsd00 (also 83s.localhost, gsd00.localhost in dev).
+  { site: '83s', pattern: '(^|\\.)83s' },
+  { site: 'gsd00', pattern: '(^|\\.)gsd00' },
 ];
 
 const HOST_MAP = HOST_PATTERNS.map(({ site, pattern }) => ({
