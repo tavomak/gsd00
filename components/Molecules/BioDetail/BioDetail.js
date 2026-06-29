@@ -9,7 +9,6 @@ const BioDetail = ({ item }) => (
         <h3 className="text-2xl font-bold text-gray-900 sm:text-4xl">
           {item.name}
         </h3>
-
         <p className="mt-1 font-medium text-gray-600">
           {item.position}
           {item?.linkedin && (

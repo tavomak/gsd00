@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { navItems } from '@/utils';
 import { useRouter } from 'next/router';
+import { useSite } from '@/contexts/SiteContext';
 import MobileNavigation from '../MobileNavigation';
 import DesktopNavigation from '../DesktopNavigation';
 
 const Navbar = () => {
   const router = useRouter();
+  const { config } = useSite();
+  const filteredNavItems = useMemo(
+    () => navItems.filter((item) => config.navKeys?.includes(item.label)),
+    [config.navKeys]
+  );
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(0);
@@ -34,13 +40,12 @@ const Navbar = () => {
         <MobileNavigation
           menuOpen={menuOpen}
           setMenuOpen={setMenuOpen}
-          navItems={navItems}
+          navItems={filteredNavItems}
           handleClick={handleClick}
-          image="/horizontal-logo.png"
         />
       ) : (
         <DesktopNavigation
-          navItems={navItems}
+          navItems={filteredNavItems}
           showSubMenu={showSubMenu}
           setShowSubMenu={setShowSubMenu}
           handleClick={handleClick}

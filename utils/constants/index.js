@@ -1,24 +1,9 @@
-export const siteName = 'GSD00';
-
-export const siteUrl = 'https://gsd00.com/';
-export const siteEmail = 'info@gsd00.com';
+import { sites } from '@/config/sites';
 
 export const navItems = [
   {
     label: 'nav_homepage_title',
     path: '/',
-    children: false,
-    visible: true,
-  },
-  // {
-  //   label: 'nav_about_title',
-  //   path: '/about',
-  //   children: false,
-  //   visible: true,
-  // },
-  {
-    label: 'nav_gallery_title',
-    path: '/gallery',
     children: false,
     visible: true,
   },
@@ -29,17 +14,37 @@ export const navItems = [
     visible: true,
   },
   {
+    label: 'nav_video_title',
+    path: '/projects',
+    children: false,
+    visible: true,
+  },
+  {
+    label: 'nav_photography_title',
+    path: `https://${sites.gsd00.domain}/`,
+    external: true,
+    children: false,
+    visible: true,
+  },
+  {
+    label: 'nav_gallery_title',
+    path: '/gallery',
+    children: false,
+    visible: true,
+  },
+  {
+    label: 'nav_about_title',
+    path: '/about',
+    children: false,
+    visible: true,
+  },
+  {
     label: 'nav_contact_title',
     path: '/contact',
     children: false,
     visible: true,
   },
 ];
-
-export const socialMedia = {
-  linkedin: 'https://www.linkedin.com/company/gsd00',
-  instagram: 'https://www.instagram.com/gsd00/',
-};
 
 export const environments = {
   production: 'production',

@@ -22,8 +22,8 @@ const Card = ({ item, handleClick }) => (
         <span>{item?.linkedin && <FaLinkedin className="text-2xl" />}</span>
       </div>
       <h3 className="text-xl font-bold">{item.name}</h3>
-      <p className="text-sm font-bold">{item.position}</p>
-      <p className="text-sm">{item.email}</p>
+      <p className="text-base font-bold">{item.position}</p>
+      <p className="text-base">{item.email}</p>
       {item?.officeTag && (
         <div className="mt-2">
           <span className="px-4 rounded-full bg-primary-color">
