@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/tavomak/gsd00/compare/v1.3.0...v1.3.1) (2026-06-29)
+
+
+### Bug Fixes
+
+* **sites:** match site token as label prefix so real domains resolve ([3d76ae2](https://github.com/tavomak/gsd00/commit/3d76ae2327259825b16799ea7f230fc0ba44fd21))
+
 # [1.3.0](https://github.com/tavomak/gsd00/compare/v1.2.4...v1.3.0) (2026-06-29)
 
 
