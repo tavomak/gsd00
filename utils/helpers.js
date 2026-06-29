@@ -1,5 +1,6 @@
 // Prefix a path with the locale segment. Spanish is the default locale (no prefix).
-export const localePath = (lang, path) => `${lang === 'es' ? '' : '/en'}${path}`;
+export const localePath = (lang, path) =>
+  `${lang === 'es' ? '' : '/en'}${path}`;
 
 export function getVimeoId(value) {
   if (!value) return null;
