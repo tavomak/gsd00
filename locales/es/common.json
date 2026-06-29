@@ -1,6 +1,6 @@
 {
   "nav_homepage_title": "Inicio",
-  "nav_about_title": "Nosotros",
+  "nav_about_title": "Biografía",
   "nav_gallery_title": "Galería",
   "nav_projects_title": "Proyectos",
   "nav_team_title": "Equipo",
@@ -14,7 +14,9 @@
   "nav_go_to_gallery_title": "Ir a galería",
   "who_we_are_title": "Quienes somos",
   "view_all_projects": "Ver todos los proyectos",
+  "studio_tagline": "Un estudio creativo dedicado al Freestyle branded content",
   "view_project": "Ver proyecto",
+  "go_to_project": "Ver proyecto",
   "our_customers": "Nuestros clientes",
   "contact_title": "Escríbenos",
   "contact_success_message": "Hemos recibido tu mensaje. Nos contactaremos contigo pronto.",
