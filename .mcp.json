@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "hygraph": {
+      "type": "http",
+      "url": "https://mcp-us-west-2.hygraph.com/cmm0unmb900ex07wcahafxp94/master/mcp",
+      "headers": {
+        "Authorization": "Bearer ${HYGRAPH_MCP_TOKEN}"
+      }
+    }
+  }
+}

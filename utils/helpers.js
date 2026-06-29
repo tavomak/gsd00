@@ -1,13 +1,9 @@
-export const bannersToShow = (items) => {
-  const now = new Date();
-  return items.filter((item) => !item.endTime || now < new Date(item.endTime));
-};
-
-export function formatPhoneNumberString(value) {
-  const trimmedValue = value.trim().replace(/\s/g, '');
-  const valueToReturn = `${trimmedValue.slice(0, 1)} ${trimmedValue.slice(1, 5)} ${trimmedValue.slice(5)}`;
-
-  return valueToReturn;
+export function getVimeoId(value) {
+  if (!value) return null;
+  const str = String(value).trim();
+  if (/^\d+$/.test(str)) return str;
+  const match = str.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  return match ? match[1] : null;
 }
 
 let lastRequestTime = 0;

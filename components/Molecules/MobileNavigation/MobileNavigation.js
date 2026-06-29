@@ -1,16 +1,14 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Hamburger from '@/components/Atoms/Hamburger';
 import useTranslation from 'next-translate/useTranslation';
 import LanguageSwitcher from '@/components/Atoms/LanguageSwitcher';
-import { siteName } from '@/utils';
+import SiteLogo from '@/components/Atoms/SiteLogo';
 
 const MobileNavigation = ({
   menuOpen = false,
   setMenuOpen,
   navItems,
   handleClick,
-  image,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -19,17 +17,7 @@ const MobileNavigation = ({
       aria-label="Global"
     >
       <Link href="/">
-        <Image
-          src={image}
-          alt={siteName}
-          width={120}
-          height={36}
-          priority
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-        />
+        <SiteLogo variant="mobile" />
       </Link>
       <Hamburger open={menuOpen} setOpen={setMenuOpen} />
       <ul
@@ -39,13 +27,16 @@ const MobileNavigation = ({
           .filter((item) => item.visible)
           .map((item) => (
             <li className="text-xl font-bold" key={item.label}>
-              {item.external && !item.children && (
-                <a href={item.path} target="_blank">
+              {!item.children && (
+                <Link
+                  href={item.path}
+                  {...(item.external && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
+                >
                   {t(item.label)}
-                </a>
-              )}
-              {!item.external && !item.children && (
-                <Link href={item.path}>{t(item.label)}</Link>
+                </Link>
               )}
               {item.children &&
                 item.children.map((subItem) => (

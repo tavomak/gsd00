@@ -2,12 +2,13 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import { PagesProgressBar as ProgressBar } from 'next-nprogress-bar';
 import poppins from '@/utils/fonts';
 import { environments } from '@/utils/constants';
+import { SiteProvider } from '@/contexts/SiteContext';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/main.css';
 
 function App({ Component, pageProps }) {
   return (
-    <>
+    <SiteProvider initialSite={pageProps.siteKey}>
       <style jsx global>
         {`
           :root {
@@ -25,7 +26,7 @@ function App({ Component, pageProps }) {
         options={{ showSpinner: false }}
         shallowRouting
       />
-    </>
+    </SiteProvider>
   );
 }
 

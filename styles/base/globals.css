@@ -4,6 +4,19 @@ body {
   background: var(--black);
 }
 
+[data-site='83s'] header {
+  background: var(--black);
+  color: var(--white);
+}
+
+[data-site='83s'] header nav {
+  color: var(--white);
+}
+
+[data-site='gsd00'] .footer-logo-wrap {
+  background: var(--white);
+}
+
 .rfm-marquee-container {
   overflow: hidden;
 }
@@ -32,11 +45,11 @@ body {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary-color/50;
+  background-color: color-mix(in srgb, var(--primary-color) 50%, transparent);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  @apply bg-primary-color/50;
+  background-color: color-mix(in srgb, var(--primary-color) 50%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
