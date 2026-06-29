@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/tavomak/gsd00/compare/v1.2.3...v1.2.4) (2026-06-29)
+
+
+### Bug Fixes
+
+* complete WordPress removal and adopt parameterized Hygraph api.js ([5beee9c](https://github.com/tavomak/gsd00/commit/5beee9c062ceaadbe739b8dbe9f2ae8b05f9846f))
+
 ## [1.2.3](https://github.com/tavomak/gsd00/compare/v1.2.2...v1.2.3) (2026-06-29)
 
 
