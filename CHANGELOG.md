@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/tavomak/gsd00/compare/v1.2.1...v1.2.2) (2026-06-29)
+
+
+### Bug Fixes
+
+* update ([e6d7dd6](https://github.com/tavomak/gsd00/commit/e6d7dd644d234ca00c3a75970666378ab2f130b4))
+
 ## [1.2.1](https://github.com/tavomak/gsd00/compare/v1.2.0...v1.2.1) (2026-06-29)
 
 
