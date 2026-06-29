@@ -16,7 +16,7 @@ const DesktopNavigation = ({
       className="container relative flex items-center justify-between max-w-screen-xl mx-auto text-black md:px-4"
       aria-label="Global"
     >
-      <div className="flex w-1/3">
+      <div className="flex">
         <Link href="/">
           <SiteLogo variant="desktop" />
         </Link>

@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/tavomak/gsd00/compare/v1.2.4...v1.3.0) (2026-06-29)
+
+
+### Bug Fixes
+
+* **gsd00:** use horizontal logo in menu ([dd13bd7](https://github.com/tavomak/gsd00/commit/dd13bd769910d7b4468ce02896b56701769d69b7))
+* restore pnpm lint by dropping eslint-config-airbnb ([b5c7fe7](https://github.com/tavomak/gsd00/commit/b5c7fe700e8aaaeae5f6930eb23e6feb4c244239))
+* **StickyTwoColumn:** move inView callback out of render ([c8dd8f9](https://github.com/tavomak/gsd00/commit/c8dd8f9d54f4333e77d24774e4ebb40d860aa34c))
+
+
+### Features
+
+* integrate multisite WIP stash + upgrade to Next 16 ([8459471](https://github.com/tavomak/gsd00/commit/84594719f4339b84be3ce688cd72a586af201e0c))
+
 ## [1.2.4](https://github.com/tavomak/gsd00/compare/v1.2.3...v1.2.4) (2026-06-29)
 
 

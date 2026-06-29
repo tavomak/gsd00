@@ -1,13 +1,9 @@
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { GraphQLClient } from 'graphql-request';
 
-const client = new ApolloClient({
-  link: new HttpLink({
-    uri: process.env.NEXT_PUBLIC_CMS_API_URL,
-    headers: {
-      Authorization: `Bearer ${process.env.HYGRAPH_TOKEN}`,
-    },
-  }),
-  cache: new InMemoryCache(),
+const client = new GraphQLClient(process.env.NEXT_PUBLIC_CMS_API_URL, {
+  headers: {
+    Authorization: `Bearer ${process.env.HYGRAPH_TOKEN}`,
+  },
 });
 
 const sleep = (ms) =>
@@ -40,11 +36,11 @@ const executeHygraphQuery = async (
   await throttle();
 
   try {
-    return await client.query({ query, variables, fetchPolicy: 'no-cache' });
+    const data = await client.request(query, variables);
+    return { data };
   } catch (error) {
     const isRateLimit =
-      error?.networkError?.statusCode === 429 ||
-      error?.message?.includes('429');
+      error?.response?.status === 429 || error?.message?.includes('429');
 
     if (isRateLimit && attempt < retries) {
       const delay = 2 ** attempt * 1000;
@@ -57,7 +53,7 @@ const executeHygraphQuery = async (
     }
 
     // eslint-disable-next-line no-console
-    console.error('Apollo Error (Hygraph):', error);
+    console.error('Hygraph query error:', error);
     return { data: null, error };
   }
 };

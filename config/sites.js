@@ -8,7 +8,7 @@ export const sites = {
     defaultLocale: 'es',
     name: 'GSD00',
     logo: {
-      src: '/brand-icon.svg',
+      src: '/horizontal-logo.png',
       width: 220,
       height: 60,
     },

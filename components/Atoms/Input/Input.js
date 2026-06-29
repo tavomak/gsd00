@@ -62,7 +62,7 @@ const Input = ({
         )}
 
         {errors && (
-          <span className="pointer-events-none absolute bottom-0 end-2.5 -translate-y-1/2 p-0.5 text-xs text-red-600 transition-all">
+          <span className="pointer-events-none absolute bottom-0 end-2.5 -translate-y-1/2 p-0.5 text-base text-red-600 transition-all">
             {errors.message}
           </span>
         )}
