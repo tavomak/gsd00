@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import { localePath } from '@/utils';
 
 const ProjectCard = ({ project, lang }) => (
   <Link
-    href={`${lang === 'es' ? '' : '/en'}/projects/${project?.slug}`}
+    href={localePath(lang, `/projects/${project?.slug}`)}
     className="relative block overflow-hidden border rounded-xl border-neutral-800 group"
   >
     <div className="relative w-full aspect-[16/9]">
