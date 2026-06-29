@@ -203,7 +203,7 @@ const HomeGsd00 = ({ data, siteDomain }) => {
               alt: project.title || 'Project image',
               title: project.title,
               description: project.description,
-              href: `https://${siteDomain}/proyectos/${project.slug}`,
+              href: `https://${siteDomain}/projects/${project.slug}`,
             }))}
           />
         </FadeIn>

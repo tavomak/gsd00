@@ -2,7 +2,8 @@
 
 ## Required (All in .env.local)
 ```
-NEXT_PUBLIC_CMS_API_URL           # GraphCMS endpoint
+NEXT_PUBLIC_CMS_API_URL           # Hygraph (GraphCMS) endpoint
+HYGRAPH_TOKEN                     # Server-only Hygraph PAT (Bearer auth for api.js)
 NEXT_PUBLIC_EMAIL_JS_SERVICE_ID   # EmailJS
 NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID
 NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY
