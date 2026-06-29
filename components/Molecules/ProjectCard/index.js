@@ -9,12 +9,8 @@ const ProjectCard = ({ project, lang }) => (
   >
     <div className="relative w-full aspect-[4/3]">
       <Image
-        src={
-          project?.proyectosBackground?.gifPortada?.node?.mediaItemUrl ||
-          project?.featuredImage?.node?.mediaItemUrl ||
-          '/assets/default_project_image.jpg'
-        }
-        alt={project?.title?.replace(/<[^>]*>/g, '')}
+        src={project?.primaryImage?.url || '/assets/default_project_image.jpg'}
+        alt={project?.title || 'Project image'}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-105"
         priority
@@ -26,10 +22,7 @@ const ProjectCard = ({ project, lang }) => (
       whileHover={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
     >
-      <h3
-        className="text-xl font-bold text-white"
-        dangerouslySetInnerHTML={{ __html: project?.title }}
-      />
+      <h3 className="text-xl font-bold text-white">{project?.title}</h3>
       {project?.description && (
         <p className="mt-1 text-sm text-neutral-300 line-clamp-2">
           {project.description}
@@ -43,7 +36,7 @@ const ProjectCard = ({ project, lang }) => (
     </motion.div>
     <div className="p-4 border-t md:hidden border-neutral-800">
       <h3 className="text-base font-bold transition-colors duration-300 group-hover:text-primary-color">
-        <span dangerouslySetInnerHTML={{ __html: project?.title }} />
+        {project?.title}
       </h3>
     </div>
   </Link>
