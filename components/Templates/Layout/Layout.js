@@ -2,12 +2,43 @@ import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Head from 'next/head';
 import Script from 'next/script';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Navbar from '@/components/Molecules/Navbar';
 import Footer from '@/components/Molecules/Footer';
 import PropTypes from 'prop-types';
-import { siteName } from '@/utils';
+import { useSite } from '@/contexts/SiteContext';
 import GoToTopButton from '@/components/Molecules/GoToTopButton';
+import i18nConfig from '@/i18n.json';
+
+const APPLE_ICON_SIZES = [57, 60, 72, 76, 114, 120, 144, 152, 180];
+const FAVICON_PNG_SIZES = [32, 96, 16];
+
+const OG_LOCALE_MAP = {
+  es: 'es_ES',
+  en: 'en_US',
+};
+
+function stripLocale(pathname, locales) {
+  const match = locales.find(
+    (loc) => pathname === `/${loc}` || pathname.startsWith(`/${loc}/`)
+  );
+  if (!match) return pathname;
+  if (pathname === `/${match}`) return '/';
+  return pathname.slice(match.length + 1);
+}
+
+function buildLocalizedUrl(origin, locale, defaultLocale, pathname) {
+  const path = pathname === '/' ? '' : pathname;
+  if (locale === defaultLocale) return `${origin}${path || '/'}`;
+  return `${origin}/${locale}${path}`;
+}
+
+function absolutize(origin, url) {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${origin}${url.startsWith('/') ? '' : '/'}${url}`;
+}
 
 const Layout = ({
   children,
@@ -16,15 +47,42 @@ const Layout = ({
   schema,
   className,
   image,
+  imageWidth = 1200,
+  imageHeight = 630,
+  imageAlt,
+  ogType = 'website',
   noPreFooter,
   noContact,
 }) => {
   const { t, lang } = useTranslation('common');
+  const { config } = useSite();
+  const router = useRouter();
+  const siteName = config?.name || '';
+  const domain = config?.domain || '';
+  const origin = domain ? `https://${domain}` : '';
+  const iconBase = config?.icons?.base || '';
+  const manifestHref = config?.icons?.manifest || '/manifest.json';
+  const msTileHref = config?.icons?.msTile || '';
+  const themeColor = config?.themeColor || '#ffffff';
+  const msTileColor = config?.msTileColor || themeColor;
+  const locales = i18nConfig.locales || ['es', 'en'];
+  const defaultLocale =
+    config?.defaultLocale || i18nConfig.defaultLocale || 'es';
+  const asPath = (router?.asPath || '/').split('?')[0].split('#')[0];
+  const cleanPath = stripLocale(asPath, locales);
+  const canonical = buildLocalizedUrl(origin, lang, defaultLocale, cleanPath);
+  const ogImageResolved = absolutize(
+    origin,
+    image || config?.seo?.defaultOgImage || ''
+  );
+  const metaDescription =
+    description ||
+    config?.seo?.defaultDescription ||
+    t('seo.default_description');
+  const resolvedTitle =
+    title && title !== siteName ? `${title} | ${siteName}` : siteName;
+  const twitterHandle = config?.twitter || '';
   const [showTopBtn, setShowTopBtn] = useState(false);
-  const [hostname, setHostname] = useState('');
-  useEffect(() => {
-    setHostname(window.location.href);
-  }, []);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 600) {
@@ -41,96 +99,92 @@ const Layout = ({
   return (
     <>
       <Head>
-        <title>{`${title ? `${title} | ${siteName}` : siteName}`}</title>
+        <title>{resolvedTitle}</title>
         <meta charSet="UTF-8" />
-        <meta
-          name="description"
-          content={`${description || t('seo.default_description')}`}
-        />
-        <link rel="canonical" href={hostname} />
-        <meta
-          property="og:locale"
-          content={lang === 'es' ? 'es_ES' : 'en_US'}
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={hostname} />
-        <meta property="og:site_name" content={siteName} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="og:image" content={image} />
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonical} />
 
+        {locales.map((loc) => (
+          <link
+            key={`hreflang-${loc}`}
+            rel="alternate"
+            hrefLang={loc}
+            href={buildLocalizedUrl(origin, loc, defaultLocale, cleanPath)}
+          />
+        ))}
         <link
-          rel="apple-touch-icon"
-          sizes="57x57"
-          href="/apple-icon-57x57.png"
+          rel="alternate"
+          hrefLang="x-default"
+          href={buildLocalizedUrl(
+            origin,
+            defaultLocale,
+            defaultLocale,
+            cleanPath
+          )}
         />
-        <link
-          rel="apple-touch-icon"
-          sizes="60x60"
-          href="/apple-icon-60x60.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="72x72"
-          href="/apple-icon-72x72.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="76x76"
-          href="/apple-icon-76x76.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="114x114"
-          href="/apple-icon-114x114.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="120x120"
-          href="/apple-icon-120x120.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="144x144"
-          href="/apple-icon-144x144.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="152x152"
-          href="/apple-icon-152x152.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-icon-180x180.png"
-        />
+
+        <meta property="og:type" content={ogType} />
+        <meta property="og:site_name" content={siteName} />
+        <meta property="og:title" content={resolvedTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:locale" content={OG_LOCALE_MAP[lang] || 'es_ES'} />
+        {locales
+          .filter((loc) => loc !== lang)
+          .map((loc) => (
+            <meta
+              key={`og-locale-${loc}`}
+              property="og:locale:alternate"
+              content={OG_LOCALE_MAP[loc] || loc}
+            />
+          ))}
+        {ogImageResolved && (
+          <>
+            <meta property="og:image" content={ogImageResolved} />
+            <meta property="og:image:width" content={String(imageWidth)} />
+            <meta property="og:image:height" content={String(imageHeight)} />
+            <meta property="og:image:alt" content={imageAlt || resolvedTitle} />
+          </>
+        )}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={resolvedTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        {ogImageResolved && (
+          <meta name="twitter:image" content={ogImageResolved} />
+        )}
+        {twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+
+        {APPLE_ICON_SIZES.map((size) => (
+          <link
+            key={`apple-${size}`}
+            rel="apple-touch-icon"
+            sizes={`${size}x${size}`}
+            href={`${iconBase}/apple-icon-${size}x${size}.png`}
+          />
+        ))}
         <link
           rel="icon"
           type="image/png"
           sizes="192x192"
-          href="/android-icon-192x192.png"
+          href={`${iconBase}/android-icon-192x192.png`}
         />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="96x96"
-          href="/favicon-96x96.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <meta name="theme-color" content="#ffffff" />
+        {FAVICON_PNG_SIZES.map((size) => (
+          <link
+            key={`favicon-${size}`}
+            rel="icon"
+            type="image/png"
+            sizes={`${size}x${size}`}
+            href={`${iconBase}/favicon-${size}x${size}.png`}
+          />
+        ))}
+        <link rel="icon" sizes="any" href={`${iconBase}/favicon.ico`} />
+        <link rel="manifest" href={manifestHref} />
+        <meta name="msapplication-TileColor" content={msTileColor} />
+        {msTileHref && (
+          <meta name="msapplication-TileImage" content={msTileHref} />
+        )}
+        <meta name="theme-color" content={themeColor} />
       </Head>
       <Navbar />
       <main className={`min-h-[calc(100vh-217px)] flex flex-col ${className}`}>
@@ -161,7 +215,12 @@ Layout.propTypes = {
   schema: PropTypes.shape({}),
   className: PropTypes.string,
   image: PropTypes.string,
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
+  imageAlt: PropTypes.string,
+  ogType: PropTypes.string,
   noPreFooter: PropTypes.bool,
+  noContact: PropTypes.bool,
 };
 
 export default Layout;

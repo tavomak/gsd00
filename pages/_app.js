@@ -1,6 +1,6 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import { PagesProgressBar as ProgressBar } from 'next-nprogress-bar';
-import poppins from '@/utils/fonts';
+import primaryFont from '@/utils/fonts';
 import { environments } from '@/utils/constants';
 import { SiteProvider } from '@/contexts/SiteContext';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,7 @@ function App({ Component, pageProps }) {
       <style jsx global>
         {`
           :root {
-            --font-poppins: ${poppins.style.fontFamily};
+            --font-ibm-plex-mono: ${primaryFont.style.fontFamily};
           }
         `}
       </style>

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { galleryImages, buildOrganizationSchema } from '@/utils';
+import { galleryImages, buildOrganizationSchema, localePath } from '@/utils';
 import { useSite } from '@/contexts/SiteContext';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
@@ -65,7 +65,7 @@ const HomeGsd00 = ({ data, siteDomain }) => {
                   project.primaryImage?.url,
                 alt: project.title || 'Project image',
                 title: project.title,
-                href: `${lang === 'es' ? '' : '/en'}/projects/${project.slug}`,
+                href: localePath(lang, `/projects/${project.slug}`),
               }))}
               autoplay
               loop
@@ -97,15 +97,13 @@ const HomeGsd00 = ({ data, siteDomain }) => {
           <MasonryGallery
             images={projectImages}
             onImageClick={(index) => {
-              router.push(
-                `${lang === 'es' ? '' : '/en'}/projects/${projectSlugs[index]}`
-              );
+              router.push(localePath(lang, `/projects/${projectSlugs[index]}`));
             }}
           />
         </FadeIn>
         <div className="flex justify-center mt-10">
           <FadeIn>
-            <Link href={`${lang === 'es' ? '' : '/en'}/projects`}>
+            <Link href={localePath(lang, '/projects')}>
               <Button className="btn btn-primary group">
                 {t('view_all_projects')}
               </Button>

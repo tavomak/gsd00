@@ -32,7 +32,7 @@ const LanguageSwitcher = () => {
             />
           </li>
           <li>
-            <span className="uppercase">{lng}</span>
+            <span className="uppercase text-base font-bold">{lng}</span>
           </li>
         </ul>
       </Button>

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'graphql-request';
 
 export const GET_PAGE_HOME = gql`
   query getPageHome($slug: String!, $locales: [Locale!]!) {

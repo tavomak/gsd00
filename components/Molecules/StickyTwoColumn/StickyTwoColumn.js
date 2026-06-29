@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,11 +10,9 @@ const ScrollItem = ({ item, index, onInView }) => {
   const [hovered, setHovered] = useState(false);
   const { t } = useTranslation('common');
 
-  const prevInView = useRef(false);
-  if (isInView && !prevInView.current) {
-    onInView(item, index);
-  }
-  prevInView.current = isInView;
+  useEffect(() => {
+    if (isInView) onInView(item, index);
+  }, [isInView, item, index, onInView]);
 
   return (
     <div ref={ref} className="mb-6 last:mb-0">
@@ -168,7 +166,7 @@ const StickyTwoColumn = ({ items = [] }) => {
             key={item.id || item.title}
             item={item}
             index={index}
-            onInView={() => handleInView(item, index)}
+            onInView={handleInView}
           />
         ))}
       </div>

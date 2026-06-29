@@ -1,11 +1,10 @@
-// eslint-disable-next-line camelcase
-import { Poppins } from 'next/font/google';
+import { IBM_Plex_Mono } from 'next/font/google';
 
-const poppins = Poppins({
+const primaryFont = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '900'],
+  weight: ['400', '500', '700'],
   display: 'swap',
-  variable: '--font-poppins',
+  variable: '--font-ibm-plex-mono',
 });
 
-export default poppins;
+export default primaryFont;
