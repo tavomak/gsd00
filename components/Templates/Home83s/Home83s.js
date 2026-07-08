@@ -7,10 +7,11 @@ import FadeIn from '@/components/Atoms/FadeIn';
 import { buildOrganizationSchema } from '@/utils';
 import { useSite } from '@/contexts/SiteContext';
 
-const Home83s = ({ data, projects }) => {
+const Home83s = ({ data }) => {
   const { lang } = useTranslation();
   const { config } = useSite();
   const orgSchema = buildOrganizationSchema(config);
+  const projects = data?.homeProjects || [];
   return (
     <Layout
       title={data?.seoMetadata?.title}
@@ -42,12 +43,12 @@ Home83s.propTypes = {
       title: PropTypes.string,
       seoDescription: PropTypes.string,
     }),
+    homeProjects: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      })
+    ),
   }),
-  projects: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default Home83s;
