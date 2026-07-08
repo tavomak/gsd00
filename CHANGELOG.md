@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/tavomak/gsd00/compare/v1.3.1...v1.3.2) (2026-07-08)
+
+
+### Bug Fixes
+
+* video projects ([3df2f46](https://github.com/tavomak/gsd00/commit/3df2f46c43f911adb989158e4490db126fb3e722))
+
 ## [1.3.1](https://github.com/tavomak/gsd00/compare/v1.3.0...v1.3.1) (2026-06-29)
 
 
