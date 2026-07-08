@@ -51,14 +51,16 @@ export async function getStaticPaths({ locales, defaultLocale }) {
     const paths = locales.flatMap((locale) =>
       siteEntries.flatMap((siteCfg) =>
         projects
-          .filter((p) => p.categories?.includes(siteCfg.category))
+          .filter((p) =>
+            p.categories?.some((c) => c.toLowerCase() === siteCfg.category)
+          )
           .map((p) => ({
             params: { site: siteCfg.key, slug: p.slug },
             locale,
           }))
       )
     );
-    return { paths, fallback: true };
+    return { paths, fallback: 'blocking' };
   } catch (error) {
     console.error('Error fetching project paths:', error);
     return { paths: [], fallback: true };

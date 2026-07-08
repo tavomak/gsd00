@@ -25,12 +25,14 @@ export async function getStaticProps({ locale, params }) {
   try {
     const response = await getPageBySlug(GET_PAGE_HOME, 'home', [locale]);
     const data = response?.data?.page || {};
-    const filteredHomeProjects = (data.homeProjects || []).filter((project) =>
-      (project.categories || []).includes(siteConfig.category)
-    );
+    const matchesSite = (project) =>
+      (project.categories || []).some(
+        (c) => c.toLowerCase() === siteConfig.category
+      );
+    const filteredHomeProjects = (data.homeProjects || []).filter(matchesSite);
     const projectsResponse = await getProjects(GET_PROJECTS, [locale]);
     const projects = (projectsResponse?.data?.projects || []).filter(
-      (project) => project.categories?.includes(siteConfig.category)
+      matchesSite
     );
     return {
       props: {
