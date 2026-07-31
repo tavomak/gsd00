@@ -2,7 +2,7 @@ import { gql } from 'graphql-request';
 
 export const GET_PROJECTS = gql`
   query getProjects($locales: [Locale!]!) {
-    projects(locales: $locales) {
+    projects(locales: $locales, first: 100) {
       id
       slug
       title
