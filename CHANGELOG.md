@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/tavomak/gsd00/compare/v1.3.2...v1.4.0) (2026-07-31)
+
+
+### Features
+
+* default seo description ([cc58f73](https://github.com/tavomak/gsd00/commit/cc58f739d66a3465b36ee0cc1157fab842f79c72))
+
 ## [1.3.2](https://github.com/tavomak/gsd00/compare/v1.3.1...v1.3.2) (2026-07-08)
 
 
