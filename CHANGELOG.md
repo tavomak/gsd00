@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/tavomak/gsd00/compare/v1.4.0...v1.4.1) (2026-11-16)
+
+
+### Bug Fixes
+
+* slice ([c03b6c9](https://github.com/tavomak/gsd00/commit/c03b6c9f365de579603d82592079ec0f33681672))
+
 # [1.4.0](https://github.com/tavomak/gsd00/compare/v1.3.2...v1.4.0) (2026-07-31)
 
 

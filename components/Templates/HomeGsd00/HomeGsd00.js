@@ -32,14 +32,12 @@ const HomeGsd00 = ({ data, siteDomain }) => {
   const { config } = useSite();
   const orgSchema = buildOrganizationSchema(config);
 
-  const projectImages = (data.homeProjects || [])
-    .slice(0, 6)
-    .map((project) => ({
-      id: project.id,
-      src: project.seoMetadata?.seoImage?.url || project.primaryImage?.url,
-      alt: project.title || 'Project image',
-    }));
-  const projectSlugs = (data.homeProjects || []).slice(0, 6).map((p) => p.slug);
+  const projectImages = (data.homeProjects || []).map((project) => ({
+    id: project.id,
+    src: project.seoMetadata?.seoImage?.url || project.primaryImage?.url,
+    alt: project.title || 'Project image',
+  }));
+  const projectSlugs = (data.homeProjects || []).map((p) => p.slug);
 
   return (
     <Layout
@@ -58,7 +56,7 @@ const HomeGsd00 = ({ data, siteDomain }) => {
         <FadeIn>
           <div className="mx-4">
             <ImageGalleryCarousel
-              items={(data.homeProjects || []).slice(5, 9).map((project) => ({
+              items={(data.homeProjects || []).map((project) => ({
                 id: project.id,
                 src:
                   project.seoMetadata?.seoImage?.url ||
