@@ -371,7 +371,7 @@ const Documentary = () => {
               “{t('filial.quote')}”
             </blockquote>
           </div>
-          <div className="md:pl-8 md:border-l border-doc-navy/30">
+          <div className="md:pl-8 md:border-l border-doc-navy/40">
             <p>{t('filial.body')}</p>
             <div className="mt-6">
               <PlayButton
