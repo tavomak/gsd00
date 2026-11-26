@@ -53,6 +53,7 @@ export const sites = {
       'nav_contact_title',
     ],
     instagram: 'https://www.instagram.com/83s.content/',
+    extraPaths: ['/en-todas-las-canchas'],
     copyrightName: '83s',
     icons: {
       base: '/favicons/83s',

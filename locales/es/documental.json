@@ -1,0 +1,79 @@
+{
+  "seo": {
+    "title": "En todas las canchas somos Argentina",
+    "description": "Un documental de 83s sobre fútbol, identidad y pertenencia lejos de casa. La comunidad argentina en Barcelona y la pasión por la Selección."
+  },
+  "nav": {
+    "title": "En todas las canchas somos Argentina",
+    "documentary": "El documental",
+    "director": "La mirada",
+    "photos": "Fotografías",
+    "filial": "La filial",
+    "sponsors": "Sponsors",
+    "credits": "Créditos",
+    "cta": "Ver el documental"
+  },
+  "hero": {
+    "kicker": "Un documental de 83s",
+    "title_alt": "En todas las canchas somos Argentina",
+    "tagline": "Fútbol, identidad y pertenencia lejos de casa.",
+    "cta": "Ver el documental",
+    "duration": "25 min",
+    "image_alt": "Hinchas argentinos alentando con banderas y bombos"
+  },
+  "director": {
+    "label": "La mirada del director",
+    "quote": "Un viaje a la Argentina que también se vive en Barcelona.",
+    "body": "Este documental nace del encuentro con una comunidad que mantiene viva la pasión por la Selección, sus historias y su cultura. Un retrato sobre identidad, amistad, migración y sobre lo que significa ser argentino en cualquier lugar del mundo.",
+    "name": "Gonzalo Saavedra",
+    "role": "Director",
+    "cta": "Ver mi relato",
+    "duration": "3 min",
+    "image_alt": "Gonzalo Saavedra sentado frente a una gradería de butacas amarillas"
+  },
+  "photos": {
+    "label": "Ensayo fotográfico de",
+    "name": "Lucas Urenda",
+    "body": "Una exposición fotográfica sobre la comunidad, sus encuentros, sus protagonistas y la pasión que los une lejos de casa.",
+    "cta": "Explorar galería",
+    "portrait_alt": "Retrato del fotógrafo Lucas Urenda",
+    "images": [
+      "Bombos de la hinchada con la leyenda Siempre vamos a estar",
+      "Hinchas cantando entre banderas argentinas",
+      "Pierna con un tatuaje de Maradona",
+      "Multitud agitando banderas argentinas",
+      "Hincha de espaldas con la camiseta 10 de Messi"
+    ]
+  },
+  "filial": {
+    "label": "Los que hicieron posible esta historia",
+    "name": "Diego Justo",
+    "org": "Por la Filial Argentina Camp Barcelona",
+    "quote": "La Filial es mucho más que un grupo de hinchas. Es una familia, un lugar de encuentro, de contención y de Argentina en Barcelona.",
+    "body": "Diego Justo, fundador y referente de la Filial Argentina, cuenta cómo nació la idea de este proyecto, el trabajo de la comunidad y lo que significa mantener viva la pasión albiceleste desde lejos.",
+    "cta": "Ver su relato",
+    "duration": "6 min",
+    "image_alt": "Diego Justo durante la entrevista, con la camiseta de la Selección"
+  },
+  "sponsors": {
+    "label": "Marcas que",
+    "title": "Fueron parte",
+    "body": "Aliados que creyeron en esta historia y acompañaron el proyecto desde el comienzo.",
+    "items": [
+      { "name": "Fernet Branca", "by": "Por Ramón", "duration": "4 min" },
+      { "name": "Ogham", "by": "Por Mauri", "duration": "3 min" },
+      { "name": "Filial Argentina", "by": "Por Diego Justo", "duration": "4 min" }
+    ]
+  },
+  "footer": {
+    "title": "En todas las canchas somos Argentina",
+    "by": "Un documental de 83s",
+    "place": "Barcelona",
+    "year": "2027"
+  },
+  "video": {
+    "close": "Cerrar",
+    "soon": "Disponible pronto",
+    "play": "Reproducir"
+  }
+}

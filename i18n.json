@@ -2,6 +2,7 @@
   "locales": ["es", "en"],
   "defaultLocale": "es",
   "pages": {
-    "*": ["common"]
+    "*": ["common"],
+    "/[site]/en-todas-las-canchas": ["documental"]
   }
 }

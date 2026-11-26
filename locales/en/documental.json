@@ -1,0 +1,79 @@
+{
+  "seo": {
+    "title": "On Every Pitch We Are Argentina",
+    "description": "A documentary by 83s about football, identity and belonging far from home. The Argentine community in Barcelona and its passion for the national team."
+  },
+  "nav": {
+    "title": "On every pitch we are Argentina",
+    "documentary": "The documentary",
+    "director": "The vision",
+    "photos": "Photography",
+    "filial": "The supporters club",
+    "sponsors": "Sponsors",
+    "credits": "Credits",
+    "cta": "Watch the documentary"
+  },
+  "hero": {
+    "kicker": "A documentary by 83s",
+    "title_alt": "En todas las canchas somos Argentina (On every pitch we are Argentina)",
+    "tagline": "Football, identity and belonging far from home.",
+    "cta": "Watch the documentary",
+    "duration": "25 min",
+    "image_alt": "Argentine fans cheering with flags and drums"
+  },
+  "director": {
+    "label": "The director's vision",
+    "quote": "A journey to Argentina that is also lived in Barcelona.",
+    "body": "This documentary was born from meeting a community that keeps alive its passion for the national team, its stories and its culture. A portrait of identity, friendship, migration and what it means to be Argentine anywhere in the world.",
+    "name": "Gonzalo Saavedra",
+    "role": "Director",
+    "cta": "Watch my story",
+    "duration": "3 min",
+    "image_alt": "Gonzalo Saavedra seated in front of rows of yellow seats"
+  },
+  "photos": {
+    "label": "Photo essay by",
+    "name": "Lucas Urenda",
+    "body": "A photographic exhibition about the community, its gatherings, its people and the passion that unites them far from home.",
+    "cta": "Explore gallery",
+    "portrait_alt": "Portrait of photographer Lucas Urenda",
+    "images": [
+      "Supporters' drums reading Siempre vamos a estar",
+      "Fans singing among Argentine flags",
+      "Leg with a Maradona tattoo",
+      "Crowd waving Argentine flags",
+      "Fan seen from behind wearing Messi's number 10 shirt"
+    ]
+  },
+  "filial": {
+    "label": "The people who made this story possible",
+    "name": "Diego Justo",
+    "org": "For Filial Argentina Camp Barcelona",
+    "quote": "The Filial is much more than a group of fans. It's a family, a meeting place, a support network and a piece of Argentina in Barcelona.",
+    "body": "Diego Justo, founder and leading figure of Filial Argentina, tells how the idea for this project was born, the work of the community and what it means to keep the albiceleste passion alive from afar.",
+    "cta": "Watch his story",
+    "duration": "6 min",
+    "image_alt": "Diego Justo during the interview, wearing the national team shirt"
+  },
+  "sponsors": {
+    "label": "Brands that",
+    "title": "Were part of it",
+    "body": "Partners who believed in this story and supported the project from the very beginning.",
+    "items": [
+      { "name": "Fernet Branca", "by": "By Ramón", "duration": "4 min" },
+      { "name": "Ogham", "by": "By Mauri", "duration": "3 min" },
+      { "name": "Filial Argentina", "by": "By Diego Justo", "duration": "4 min" }
+    ]
+  },
+  "footer": {
+    "title": "On every pitch we are Argentina",
+    "by": "A documentary by 83s",
+    "place": "Barcelona",
+    "year": "2027"
+  },
+  "video": {
+    "close": "Close",
+    "soon": "Coming soon",
+    "play": "Play"
+  }
+}
