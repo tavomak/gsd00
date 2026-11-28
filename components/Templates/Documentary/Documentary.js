@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Barlow, Barlow_Condensed, Playfair_Display } from 'next/font/google';
 import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { FaPlay, FaInstagram } from 'react-icons/fa';
@@ -319,7 +320,12 @@ const Documentary = () => {
             <blockquote className="mt-4 text-3xl italic leading-tight font-doc-serif md:text-4xl">
               “{t('director.quote')}”
             </blockquote>
-            <p className="max-w-xl mt-4 md:text-lg">{t('director.body')}</p>
+            <p className="max-w-xl mt-4 md:text-lg">
+              <Trans
+                i18nKey="documental:director.body"
+                components={[<em key="title" />]}
+              />
+            </p>
             <div className="flex flex-wrap items-center justify-between gap-6 mt-8">
               <p className="pl-4 leading-tight border-l border-doc-navy/40">
                 {t('director.name')}
