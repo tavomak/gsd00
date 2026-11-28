@@ -40,8 +40,24 @@ const VIDEOS = {
   documentary: '',
   director: '',
   filial: '',
-  sponsors: ['', '', ''],
 };
+
+// Same order as sponsors.items in locales/*/documental.json
+// Heights balance optical size: the round crest needs more height than the wide sign.
+const SPONSOR_LOGOS = [
+  {
+    src: '/documental/filial-argentina.webp',
+    width: 480,
+    height: 480,
+    className: 'h-36 md:h-44',
+  },
+  {
+    src: '/documental/kiosco-argento.webp',
+    width: 640,
+    height: 322,
+    className: 'h-24 md:h-28',
+  },
+];
 
 const GALLERY = [
   { src: '/documental/galeria-bombos.jpg', className: '' },
@@ -54,16 +70,19 @@ const GALLERY = [
   { src: '/documental/galeria-messi.jpg', className: '' },
 ];
 
+export const BASE = '/en-todas-las-canchas';
+
+// Absolute so the nav also works from /galeria; Link keeps the locale prefix.
 const NAV = [
-  ['documentary', '#documental'],
-  ['director', '#mirada'],
-  ['photos', '#fotografias'],
-  ['filial', '#filial'],
-  ['sponsors', '#sponsors'],
-  ['credits', '#creditos'],
+  ['documentary', `${BASE}#documental`],
+  ['director', `${BASE}#mirada`],
+  ['photos', `${BASE}#fotografias`],
+  ['filial', `${BASE}#filial`],
+  ['sponsors', `${BASE}#sponsors`],
+  ['credits', `${BASE}#creditos`],
 ];
 
-const Label = ({ children, className = '' }) => (
+export const Label = ({ children, className = '' }) => (
   <p
     className={`font-doc-display text-xs md:text-sm font-medium uppercase tracking-[0.3em] ${className}`}
   >
@@ -136,23 +155,25 @@ VideoDialog.propTypes = {
   closeLabel: PropTypes.string.isRequired,
 };
 
-const Documentary = () => {
+// Fonts, header and footer shared by the landing and /galeria.
+// Without onPlay (gallery page) the header CTA links back to the landing.
+export const DocumentaryShell = ({ title, description, onPlay, children }) => {
   const { t } = useTranslation('documental');
   const { config } = useSite();
-  const [video, setVideo] = useState(null);
-  const [lightboxIndex, setLightboxIndex] = useState(-1);
-  const galleryAlts = t('photos.images', {}, { returnObjects: true });
-  const sponsors = t('sponsors.items', {}, { returnObjects: true });
   const soon = t('video.soon');
-  const slides = [
-    { src: '/documental/fotografo.jpg', alt: t('photos.portrait_alt') },
-    ...GALLERY.map((img, i) => ({ src: img.src, alt: galleryAlts[i] })),
-  ];
+  const ctaClass =
+    'flex items-center gap-2 px-3 py-2 text-xs font-bold tracking-wider uppercase transition border rounded border-doc-cream font-doc-display hover:bg-doc-cream hover:text-doc-navy disabled:cursor-not-allowed';
+  const ctaContent = (
+    <>
+      <FaPlay className="w-2.5 h-2.5" />
+      <span className="hidden sm:inline">{t('nav.cta')}</span>
+    </>
+  );
 
   return (
     <Layout
-      title={t('seo.title')}
-      description={t('seo.description')}
+      title={title}
+      description={description}
       image="/documental/hero.jpg"
       imageWidth={2400}
       imageHeight={1600}
@@ -176,31 +197,94 @@ const Documentary = () => {
           </span>
           <nav className="hidden gap-6 ml-auto xl:flex">
             {NAV.map(([key, href]) => (
-              <a
+              <Link
                 key={key}
                 href={href}
                 className="text-xs font-medium tracking-wider uppercase transition font-doc-display hover:text-doc-sky"
               >
                 {t(`nav.${key}`)}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="flex items-center gap-3 ml-auto xl:ml-4">
             <LanguageSwitcher />
-            <button
-              type="button"
-              onClick={() => setVideo(VIDEOS.documentary)}
-              disabled={!VIDEOS.documentary}
-              title={VIDEOS.documentary ? undefined : soon}
-              className="flex items-center gap-2 px-3 py-2 text-xs font-bold tracking-wider uppercase transition border rounded border-doc-cream font-doc-display hover:bg-doc-cream hover:text-doc-navy disabled:cursor-not-allowed"
-            >
-              <FaPlay className="w-2.5 h-2.5" />
-              <span className="hidden sm:inline">{t('nav.cta')}</span>
-            </button>
+            {onPlay ? (
+              <button
+                type="button"
+                onClick={() => onPlay(VIDEOS.documentary)}
+                disabled={!VIDEOS.documentary}
+                title={VIDEOS.documentary ? undefined : soon}
+                className={ctaClass}
+              >
+                {ctaContent}
+              </button>
+            ) : (
+              <Link href={BASE} className={ctaClass}>
+                {ctaContent}
+              </Link>
+            )}
           </div>
         </div>
       </header>
 
+      {children}
+
+      <footer id="creditos" className="border-t scroll-mt-16 border-white/20">
+        <div className="flex flex-col items-center gap-6 px-4 py-8 mx-auto text-xs tracking-widest text-center uppercase md:flex-row max-w-screen-2xl md:px-8 font-doc-display">
+          <Image
+            src={config.logo.src}
+            alt={config.name}
+            width={56}
+            height={27}
+          />
+          <span className="hidden h-8 border-l md:block border-white/30" />
+          <p className="md:mx-auto">
+            {t('footer.title')}
+            <span className="mx-3 text-white/40">|</span>
+            {t('footer.by')}
+            <span className="mx-3 text-white/40">|</span>
+            {t('footer.place')} · {t('footer.year')}
+          </p>
+          <a
+            href={config.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="hover:text-doc-sky"
+          >
+            <FaInstagram className="w-5 h-5" />
+          </a>
+        </div>
+      </footer>
+    </Layout>
+  );
+};
+
+DocumentaryShell.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onPlay: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+const Documentary = () => {
+  const { t } = useTranslation('documental');
+  const [video, setVideo] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+  const galleryAlts = t('photos.images', {}, { returnObjects: true });
+  const sponsors = t('sponsors.items', {}, { returnObjects: true });
+  const soon = t('video.soon');
+  const slides = [
+    { src: '/documental/fotografo.jpg', alt: t('photos.portrait_alt') },
+    ...GALLERY.map((img, i) => ({ src: img.src, alt: galleryAlts[i] })),
+  ];
+
+  return (
+    <DocumentaryShell
+      title={t('seo.title')}
+      description={t('seo.description')}
+      onPlay={setVideo}
+    >
       {/* Hero */}
       <section
         id="documental"
@@ -216,10 +300,10 @@ const Documentary = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-black/70 to-transparent" />
         <div className="relative w-full px-4 py-16 mx-auto max-w-screen-2xl md:px-8 md:py-24">
-          <FadeIn className="max-w-xl">
+          <FadeIn className="max-w-xl flex flex-col items-center">
             <Label className="mb-4">{t('hero.kicker')}</Label>
             <Image
-              src="/documental/titulo.webp"
+              src="/documental/logo-etsa.png"
               alt={t('hero.title_alt')}
               width={1520}
               height={485}
@@ -298,14 +382,13 @@ const Documentary = () => {
           <p className="max-w-md md:pl-6 md:border-l border-white/30 md:text-lg">
             {t('photos.body')}
           </p>
-          <button
-            type="button"
-            onClick={() => setLightboxIndex(0)}
+          <Link
+            href={`${BASE}/galeria`}
             className="flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase md:ml-auto font-doc-display hover:text-doc-sky"
           >
             <span className="border-b border-current">{t('photos.cta')}</span>
             <HiArrowLongRight className="w-6 h-6" />
-          </button>
+          </Link>
         </FadeIn>
         <FadeIn className="grid grid-cols-2 gap-3 md:grid-cols-[1.3fr_1fr_1fr_0.65fr] md:grid-rows-2 md:h-[540px]">
           <button
@@ -398,65 +481,40 @@ const Documentary = () => {
           </h2>
           <p className="max-w-xs mt-4">{t('sponsors.body')}</p>
         </FadeIn>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {sponsors.map((item, i) => (
             <FadeIn
               key={item.name}
               delay={i * 0.1}
-              className="relative flex flex-col justify-between p-5 overflow-hidden border rounded aspect-[16/9] sm:aspect-[4/3] border-white/30 bg-gradient-to-br from-white/10 to-transparent"
+              className="flex flex-col gap-5 p-5 border rounded border-white/30 bg-gradient-to-br from-white/10 to-transparent"
             >
               <p className="text-4xl italic font-extrabold leading-none uppercase font-doc-display">
                 {item.name}
               </p>
-              <div className="flex items-center gap-3">
-                <PlayButton
-                  videoId={VIDEOS.sponsors[i]}
-                  onPlay={setVideo}
-                  label={item.name}
-                  duration={item.duration}
-                  soon={soon}
+              <div className="flex items-center justify-center flex-1 min-h-48 md:min-h-56">
+                <Image
+                  src={SPONSOR_LOGOS[i].src}
+                  alt={item.name}
+                  width={SPONSOR_LOGOS[i].width}
+                  height={SPONSOR_LOGOS[i].height}
+                  sizes="320px"
+                  className={`w-auto ${SPONSOR_LOGOS[i].className}`}
                 />
-                <span className="text-sm text-doc-cream/70">{item.by}</span>
               </div>
+              {item.by && (
+                <p className="text-sm text-doc-cream/70">{item.by}</p>
+              )}
             </FadeIn>
           ))}
         </div>
       </section>
-
-      <footer id="creditos" className="border-t scroll-mt-16 border-white/20">
-        <div className="flex flex-col items-center gap-6 px-4 py-8 mx-auto text-xs tracking-widest text-center uppercase md:flex-row max-w-screen-2xl md:px-8 font-doc-display">
-          <Image
-            src={config.logo.src}
-            alt={config.name}
-            width={56}
-            height={27}
-          />
-          <span className="hidden h-8 border-l md:block border-white/30" />
-          <p className="md:mx-auto">
-            {t('footer.title')}
-            <span className="mx-3 text-white/40">|</span>
-            {t('footer.by')}
-            <span className="mx-3 text-white/40">|</span>
-            {t('footer.place')} · {t('footer.year')}
-          </p>
-          <a
-            href={config.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="hover:text-doc-sky"
-          >
-            <FaInstagram className="w-5 h-5" />
-          </a>
-        </div>
-      </footer>
 
       <VideoDialog
         videoId={video}
         onClose={() => setVideo(null)}
         closeLabel={t('video.close')}
       />
-    </Layout>
+    </DocumentaryShell>
   );
 };
 

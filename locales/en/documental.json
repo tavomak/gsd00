@@ -60,9 +60,8 @@
     "title": "Were part of it",
     "body": "Partners who believed in this story and supported the project from the very beginning.",
     "items": [
-      { "name": "Fernet Branca", "by": "By Ramón", "duration": "4 min" },
-      { "name": "Ogham", "by": "By Mauri", "duration": "3 min" },
-      { "name": "Filial Argentina", "by": "By Diego Justo", "duration": "4 min" }
+      { "name": "Filial Argentina", "by": "By Diego Justo" },
+      { "name": "El Kiosco Argento" }
     ]
   },
   "footer": {
@@ -75,5 +74,13 @@
     "close": "Close",
     "soon": "Coming soon",
     "play": "Play"
+  },
+  "gallery": {
+    "seo": {
+      "title": "Gallery · On Every Pitch We Are Argentina",
+      "description": "Photo essay by Lucas Urenda about the Argentine community in Barcelona and its passion for the national team."
+    },
+    "back": "Back to the documentary",
+    "alt": "Photo essay by Lucas Urenda — photo {{n}}"
   }
 }

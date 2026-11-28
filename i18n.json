@@ -3,6 +3,7 @@
   "defaultLocale": "es",
   "pages": {
     "*": ["common"],
-    "/[site]/en-todas-las-canchas": ["documental"]
+    "/[site]/en-todas-las-canchas": ["documental"],
+    "/[site]/en-todas-las-canchas/galeria": ["documental"]
   }
 }

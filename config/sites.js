@@ -16,6 +16,7 @@ export const sites = {
       'nav_homepage_title',
       'nav_projects_title',
       'nav_gallery_title',
+      'nav_video_83s_title',
       'nav_about_title',
       'nav_contact_title',
     ],
@@ -53,7 +54,7 @@ export const sites = {
       'nav_contact_title',
     ],
     instagram: 'https://www.instagram.com/83s.content/',
-    extraPaths: ['/en-todas-las-canchas'],
+    extraPaths: ['/en-todas-las-canchas', '/en-todas-las-canchas/galeria'],
     copyrightName: '83s',
     icons: {
       base: '/favicons/83s',
