@@ -1,0 +1,93 @@
+{
+  "seo": {
+    "title": "On Every Pitch We Are Argentina",
+    "description": "A documentary by 83s about football, identity and belonging far from home. The Argentine community in Barcelona and its passion for the national team."
+  },
+  "nav": {
+    "title": "On every pitch we are Argentina",
+    "documentary": "The documentary",
+    "director": "The vision",
+    "photos": "Photography",
+    "filial": "The supporters club",
+    "sponsors": "Sponsors",
+    "credits": "Credits",
+    "cta": "Watch the documentary"
+  },
+  "hero": {
+    "kicker": "A documentary by 83s",
+    "title_alt": "En todas las canchas somos Argentina (On every pitch we are Argentina)",
+    "tagline": "Football, identity and belonging far from home.",
+    "cta": "Watch the documentary",
+    "duration": "25 min",
+    "image_alt": "Argentine fans cheering with flags and drums"
+  },
+  "about": {
+    "label": "About the documentary",
+    "title": "En todas las canchas somos Argentina",
+    "body": [
+      "A short documentary portraying Argentine identity outside Argentina, with the 2026 FIFA World Cup as its backdrop and Barcelona as its stage.",
+      "Through the Filial Argentina, its supporters' groups and its people, we explore the life of the emigrant, the sense of belonging and football as a collective expression of an identity that transcends borders.",
+      "Because the pitch is much more than a field: it is a way of life."
+    ]
+  },
+  "director": {
+    "label": "The director's vision",
+    "quote": "Barcelona, Argentina's capital in Europe",
+    "body": "Surrendering to the process, where reality becomes the stage. There is no fiction. A place where the present is found. One that speaks for itself. There is no need to direct; there is intention, but it resolves itself in finding what is truly yours, which comes to you when the search is honest. That is <0>En todas las canchas somos Argentina</0>. Calling it a short film limits it; it is much more than a format, more than a story. It is the reality and present of a people, of immigration, culture and identity, a place that takes on an almost religious nuance, the devotion of a country that lives with hope and faith in its blood. Not only through a sport, but in life as a whole. Grateful to have captured much more than an audiovisual piece: an identity proud of itself.",
+    "name": "Gonzalo Saavedra",
+    "role": "Director",
+    "image_alt": "Gonzalo Saavedra seated in front of rows of yellow seats"
+  },
+  "photos": {
+    "label": "Photo essay by",
+    "name": "Lucas Urenda",
+    "body": "A photographic exhibition about the community, its gatherings, its people and the passion that unites them far from home.",
+    "cta": "Explore gallery",
+    "portrait_alt": "Portrait of photographer Lucas Urenda",
+    "images": [
+      "Supporters' drums reading Siempre vamos a estar",
+      "Fans singing among Argentine flags",
+      "Leg with a Maradona tattoo",
+      "Crowd waving Argentine flags",
+      "Fan seen from behind wearing Messi's number 10 shirt"
+    ]
+  },
+  "filial": {
+    "label": "The people who made this story possible",
+    "name": "Diego Justo",
+    "org": "For Filial Argentina Camp Barcelona",
+    "quote": "The Filial is much more than a group of fans. It's a family, a meeting place, a support network and a piece of Argentina in Barcelona.",
+    "body": "Diego Justo, founder and leading figure of Filial Argentina, tells how the idea for this project was born, the work of the community and what it means to keep the albiceleste passion alive from afar.",
+    "image_alt": "Diego Justo during the interview, wearing the national team shirt"
+  },
+  "sponsors": {
+    "label": "Brands that",
+    "title": "Were part of it",
+    "body": "Partners who believed in this story and supported the project from the very beginning.",
+    "items": [
+      { "name": "Filial Argentina", "by": "By Diego Justo" },
+      { "name": "El Kiosco Argento" }
+    ],
+    "future": "Sponsor",
+    "video_cta": "Watch video"
+  },
+  "footer": {
+    "title": "On every pitch we are Argentina",
+    "by": "A documentary by 83s",
+    "place": "Barcelona",
+    "year": "2027"
+  },
+  "video": {
+    "close": "Close",
+    "soon": "Coming soon",
+    "play": "Play"
+  },
+  "gallery": {
+    "seo": {
+      "title": "Gallery · On Every Pitch We Are Argentina",
+      "description": "Photo essay by Lucas Urenda about the Argentine community in Barcelona and its passion for the national team."
+    },
+    "back": "Back to the documentary",
+    "alt": "Photo essay by Lucas Urenda — photo {{n}}"
+  }
+}

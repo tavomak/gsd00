@@ -195,7 +195,9 @@ const HomeGsd00 = ({ data, siteDomain }) => {
           <StickyTwoColumn
             items={(data.homeProjects || []).slice(0, 4).map((project) => ({
               id: project.id,
-              src: project.primaryImage?.url,
+              // Static SEO image first: primaryImage can be a multi-MB GIF
+              src:
+                project.seoMetadata?.seoImage?.url || project.primaryImage?.url,
               alt: project.title || 'Project image',
               title: project.title,
               description: project.description,

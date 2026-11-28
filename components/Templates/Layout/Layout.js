@@ -53,6 +53,7 @@ const Layout = ({
   ogType = 'website',
   noPreFooter,
   noContact,
+  noChrome,
 }) => {
   const { t, lang } = useTranslation('common');
   const { config } = useSite();
@@ -186,14 +187,14 @@ const Layout = ({
         )}
         <meta name="theme-color" content={themeColor} />
       </Head>
-      <Navbar />
+      {!noChrome && <Navbar />}
       <main className={`min-h-[calc(100vh-217px)] flex flex-col ${className}`}>
         <h1 className="sr-only">{title}</h1>
         {children}
       </main>
       <ToastContainer />
       {showTopBtn && <GoToTopButton />}
-      <Footer noPreFooter={noPreFooter} noContact={noContact} />
+      {!noChrome && <Footer noPreFooter={noPreFooter} noContact={noContact} />}
       {schema && (
         // eslint-disable-next-line
         <Script
@@ -221,6 +222,7 @@ Layout.propTypes = {
   ogType: PropTypes.string,
   noPreFooter: PropTypes.bool,
   noContact: PropTypes.bool,
+  noChrome: PropTypes.bool,
 };
 
 export default Layout;
