@@ -21,15 +21,19 @@
     "duration": "25 min",
     "image_alt": "Hinchas argentinos alentando con banderas y bombos"
   },
-  "director": {
-    "label": "La mirada del director",
-    "quote": "Barcelona, la capital Argentina en Europa",
-    "body_title": "En todas las canchas somos Argentina",
+  "about": {
+    "label": "Sobre el documental",
+    "title": "En todas las canchas somos Argentina",
     "body": [
       "Un cortometraje documental que retrata la identidad argentina fuera de Argentina, con el Mundial de Fútbol 2026 como contexto y Barcelona como escenario.",
       "A través de la Filial Argentina, sus peñas y sus protagonistas, exploramos la vida del emigrante, el sentido de pertenencia y el fútbol como expresión colectiva de una identidad que trasciende fronteras.",
       "Porque la cancha es mucho más que un campo, es un estilo de vida."
-    ],
+    ]
+  },
+  "director": {
+    "label": "La mirada del director",
+    "quote": "Barcelona, la capital Argentina en Europa",
+    "body": "Entregarse al proceso, donde la realidad se transforma en el escenario. No existe ficción. Un lugar en que se encuentra el presente. Que habla por sí solo. No hay necesidad de dirigir, existe intención pero esta se resuelve en el encontrar lo propio que llega a ti cuando la búsqueda es honesta. Eso es <0>En todas las canchas somos Argentina</0>. Decir que es un cortometraje lo limita, es mucho más que un formato, más que una historia. Es realidad y presente de un pueblo, de inmigración, cultura, identidad, un lugar que encuentra un matiz casi religioso, de devoción de un país que vive con ilusión y la fe en la sangre. No solo a través de un deporte sino en la vida general. Agradecido por registrar mucho más que una pieza audiovisual, una identidad orgullosa de sí misma.",
     "name": "Gonzalo Saavedra",
     "role": "Director",
     "image_alt": "Gonzalo Saavedra sentado frente a una gradería de butacas amarillas"
@@ -64,7 +68,8 @@
       { "name": "Filial Argentina", "by": "Por Diego Justo" },
       { "name": "El Kiosco Argento" }
     ],
-    "future": "Sponsor"
+    "future": "Sponsor",
+    "video_cta": "Ver video"
   },
   "footer": {
     "title": "En todas las canchas somos Argentina",

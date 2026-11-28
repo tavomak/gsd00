@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Barlow, Barlow_Condensed, Playfair_Display } from 'next/font/google';
 import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { FaPlay, FaInstagram } from 'react-icons/fa';
@@ -38,6 +39,7 @@ const serif = Playfair_Display({
 // ponytail: Vimeo IDs live here until the content moves to Hygraph; empty = button shows "coming soon"
 const VIDEOS = {
   documentary: '',
+  sponsor: '',
 };
 
 // Same order as sponsors.items in locales/*/documental.json
@@ -300,6 +302,26 @@ const Documentary = () => {
         </div>
       </section>
 
+      {/* Sobre el documental */}
+      <section
+        id="sobre"
+        className="w-full px-4 py-12 mx-auto scroll-mt-16 max-w-screen-2xl md:px-8 md:py-16"
+      >
+        <FadeIn className="flex flex-col gap-6 md:flex-row md:items-start">
+          <div className="md:w-2/5 shrink-0">
+            <Label>{t('about.label')}</Label>
+            <h2 className="mt-1 text-5xl italic font-extrabold uppercase font-doc-display md:text-6xl">
+              {t('about.title')}
+            </h2>
+          </div>
+          <div className="max-w-2xl space-y-4 md:pl-6 md:border-l border-white/30 md:text-lg">
+            {t('about.body', {}, { returnObjects: true }).map((par) => (
+              <p key={par}>{par}</p>
+            ))}
+          </div>
+        </FadeIn>
+      </section>
+
       {/* La mirada del director */}
       <section
         id="mirada"
@@ -320,12 +342,12 @@ const Documentary = () => {
             <blockquote className="mt-4 text-3xl italic leading-tight font-doc-serif md:text-4xl">
               “{t('director.quote')}”
             </blockquote>
-            <div className="max-w-xl mt-4 space-y-4 md:text-lg">
-              <p className="italic">{t('director.body_title')}</p>
-              {t('director.body', {}, { returnObjects: true }).map((par) => (
-                <p key={par}>{par}</p>
-              ))}
-            </div>
+            <p className="max-w-xl mt-4 md:text-lg">
+              <Trans
+                i18nKey="documental:director.body"
+                components={[<em key="title" />]}
+              />
+            </p>
             <div className="flex flex-wrap items-center justify-between gap-6 mt-8">
               <p className="pl-4 leading-tight border-l border-doc-navy/40">
                 {t('director.name')}
@@ -474,6 +496,16 @@ const Documentary = () => {
             <p className="text-4xl italic font-extrabold leading-none uppercase font-doc-display text-doc-cream/60">
               {t('sponsors.future')}
             </p>
+            <button
+              type="button"
+              onClick={() => setVideo(VIDEOS.sponsor)}
+              disabled={!VIDEOS.sponsor}
+              title={VIDEOS.sponsor ? undefined : soon}
+              className="flex items-center gap-3 px-5 py-3 mt-auto text-sm font-bold tracking-widest uppercase transition border rounded w-fit font-doc-display border-doc-cream hover:bg-doc-cream hover:text-doc-navy disabled:cursor-not-allowed"
+            >
+              <FaPlay className="w-3 h-3" />
+              {t('sponsors.video_cta')}
+            </button>
           </FadeIn>
         </div>
       </section>
