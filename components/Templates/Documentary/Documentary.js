@@ -38,8 +38,6 @@ const serif = Playfair_Display({
 // ponytail: Vimeo IDs live here until the content moves to Hygraph; empty = button shows "coming soon"
 const VIDEOS = {
   documentary: '',
-  director: '',
-  filial: '',
 };
 
 // Same order as sponsors.items in locales/*/documental.json
@@ -93,33 +91,6 @@ export const Label = ({ children, className = '' }) => (
 Label.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-};
-
-const PlayButton = ({ videoId, onPlay, label, duration, soon }) => (
-  <button
-    type="button"
-    onClick={() => onPlay(videoId)}
-    disabled={!videoId}
-    title={videoId ? undefined : soon}
-    className="flex items-center gap-3 text-left group disabled:cursor-not-allowed"
-  >
-    <span className="flex items-center justify-center w-10 h-10 transition border-2 border-current rounded-full shrink-0 group-enabled:group-hover:scale-110">
-      <FaPlay className="w-3 h-3 ml-0.5" />
-    </span>
-    <span className="text-sm font-bold leading-tight uppercase font-doc-display">
-      {label}
-      <br />
-      <span className="font-medium">({duration})</span>
-    </span>
-  </button>
-);
-
-PlayButton.propTypes = {
-  videoId: PropTypes.string,
-  onPlay: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  duration: PropTypes.string.isRequired,
-  soon: PropTypes.string.isRequired,
 };
 
 // Native <dialog>: Esc, focus trap and backdrop come for free.
@@ -355,13 +326,6 @@ const Documentary = () => {
                 <br />
                 <span className="text-doc-navy/70">{t('director.role')}</span>
               </p>
-              <PlayButton
-                videoId={VIDEOS.director}
-                onPlay={setVideo}
-                label={t('director.cta')}
-                duration={t('director.duration')}
-                soon={soon}
-              />
             </div>
           </FadeIn>
         </div>
@@ -456,15 +420,6 @@ const Documentary = () => {
           </div>
           <div className="md:pl-8 md:border-l border-doc-navy/40">
             <p>{t('filial.body')}</p>
-            <div className="mt-6">
-              <PlayButton
-                videoId={VIDEOS.filial}
-                onPlay={setVideo}
-                label={t('filial.cta')}
-                duration={t('filial.duration')}
-                soon={soon}
-              />
-            </div>
           </div>
         </FadeIn>
       </section>
