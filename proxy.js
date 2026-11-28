@@ -8,7 +8,14 @@ export const config = {
   ],
 };
 
-const MIGRATED = new Set(['/', '/about', '/contact', '/gallery', '/projects']);
+const MIGRATED = new Set([
+  '/',
+  '/about',
+  '/contact',
+  '/gallery',
+  '/projects',
+  '/en-todas-las-canchas',
+]);
 const SITE_KEYS = new Set(Object.keys(sites));
 
 function isMigrated(pathname) {

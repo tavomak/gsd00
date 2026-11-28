@@ -33,9 +33,10 @@ export async function getServerSideProps({ req, res }) {
   const locales = i18nConfig.locales || ['es', 'en'];
   const defaultLocale = siteConfig.defaultLocale || i18nConfig.defaultLocale;
 
-  const staticPaths = (siteConfig.navKeys || [])
-    .map((key) => NAV_PATHS[key])
-    .filter(Boolean);
+  const staticPaths = [
+    ...(siteConfig.navKeys || []).map((key) => NAV_PATHS[key]).filter(Boolean),
+    ...(siteConfig.extraPaths || []),
+  ];
 
   let projectSlugs = [];
   try {

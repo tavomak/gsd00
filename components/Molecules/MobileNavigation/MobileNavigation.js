@@ -13,7 +13,7 @@ const MobileNavigation = ({
   const { t } = useTranslation('common');
   return (
     <nav
-      className="container relative flex items-center justify-between mx-auto md:px-4"
+      className="container relative flex items-center justify-between mx-auto text-black md:px-4"
       aria-label="Global"
     >
       <Link href="/">
@@ -21,7 +21,7 @@ const MobileNavigation = ({
       </Link>
       <Hamburger open={menuOpen} setOpen={setMenuOpen} />
       <ul
-        className={`ps-8 flex flex-col gap-1 justify-center fixed w-screen h-screen left-0 top-0 transition-all bg-black bg-opacity-95 ${menuOpen ? 'top-0' : 'top-[-120%]'}`}
+        className={`ps-8 flex flex-col gap-1 justify-center fixed inset-x-0 top-0 h-dvh text-white transition-all bg-black bg-opacity-95 ${menuOpen ? 'translate-y-0' : '-translate-y-full invisible'}`}
       >
         {navItems
           .filter((item) => item.visible)

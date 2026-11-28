@@ -1,8 +1,9 @@
 # Active Context
 
-**Updated**: 2026-06-29
+**Updated**: 2026-11-26
 
 ## Status
+**In Progress (2026-11-26)**: 83s documentary landing `/en-todas-las-canchas` — see `.agents/specs/documental-argentina.md` (pending Vimeo IDs + final assets)
 **In Progress**: Multi-domain (gsd00 + 83s) wired end-to-end; 83s favicon assets still pending drop-in
 **Recently Completed**:
 - Per-site metadata: `useSite()` in `components/Templates/Layout/Layout.js` reads `name`, `themeColor`, `msTileColor`, `icons`, `seo` from `config/sites.js`

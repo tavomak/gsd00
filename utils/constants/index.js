@@ -20,6 +20,13 @@ export const navItems = [
     visible: true,
   },
   {
+    label: 'nav_video_83s_title',
+    path: `https://${sites['83s'].domain}/`,
+    external: true,
+    children: false,
+    visible: true,
+  },
+  {
     label: 'nav_photography_title',
     path: `https://${sites.gsd00.domain}/`,
     external: true,
