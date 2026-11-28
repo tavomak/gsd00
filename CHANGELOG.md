@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/tavomak/gsd00/compare/v1.4.1...v1.5.0) (2026-11-28)
+
+
+### Features
+
+* iconos ([78dafe9](https://github.com/tavomak/gsd00/commit/78dafe94b45b37f4a1a17ae2f05ea7a86d0f3031))
+* landing canchas ([d677109](https://github.com/tavomak/gsd00/commit/d677109d359979c5db54a55c038e0d1cd24cd2dc))
+* las canchas ([2dec106](https://github.com/tavomak/gsd00/commit/2dec106c02084817bd10a6ef808f29d2e47aa834))
+* layout ([79b6a0f](https://github.com/tavomak/gsd00/commit/79b6a0fb34c5b79ea1433cb1969a24973be7e55a))
+* sponsor y texto ([dac4190](https://github.com/tavomak/gsd00/commit/dac4190cfd6c33ff060c62c43aa94e0bbfadf1aa))
+* texto ([6646651](https://github.com/tavomak/gsd00/commit/66466510b29e4df7af5b61602c4787ebe6c05e92))
+* update ([55a1e31](https://github.com/tavomak/gsd00/commit/55a1e310affe017c4741fe76e45a4a67a27126c5))
+
 ## [1.4.1](https://github.com/tavomak/gsd00/compare/v1.4.0...v1.4.1) (2026-11-16)
 
 
