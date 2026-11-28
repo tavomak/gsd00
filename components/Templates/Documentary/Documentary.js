@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Barlow, Barlow_Condensed, Playfair_Display } from 'next/font/google';
 import useTranslation from 'next-translate/useTranslation';
-import Trans from 'next-translate/Trans';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { FaPlay, FaInstagram } from 'react-icons/fa';
@@ -216,16 +215,17 @@ export const DocumentaryShell = ({ title, description, onPlay, children }) => {
             {t('footer.by')}
             <span className="mx-3 text-white/40">|</span>
             {t('footer.place')} · {t('footer.year')}
+            <span className="mx-3 text-white/40">|</span>
+            <a
+              href={config.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="inline-block align-middle hover:text-doc-sky"
+            >
+              <FaInstagram className="w-4 h-4" />
+            </a>
           </p>
-          <a
-            href={config.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="hover:text-doc-sky"
-          >
-            <FaInstagram className="w-5 h-5" />
-          </a>
         </div>
       </footer>
     </Layout>
@@ -320,12 +320,12 @@ const Documentary = () => {
             <blockquote className="mt-4 text-3xl italic leading-tight font-doc-serif md:text-4xl">
               “{t('director.quote')}”
             </blockquote>
-            <p className="max-w-xl mt-4 md:text-lg">
-              <Trans
-                i18nKey="documental:director.body"
-                components={[<em key="title" />]}
-              />
-            </p>
+            <div className="max-w-xl mt-4 space-y-4 md:text-lg">
+              <p className="italic">{t('director.body_title')}</p>
+              {t('director.body', {}, { returnObjects: true }).map((par) => (
+                <p key={par}>{par}</p>
+              ))}
+            </div>
             <div className="flex flex-wrap items-center justify-between gap-6 mt-8">
               <p className="pl-4 leading-tight border-l border-doc-navy/40">
                 {t('director.name')}
@@ -442,7 +442,7 @@ const Documentary = () => {
           </h2>
           <p className="max-w-xs mt-4">{t('sponsors.body')}</p>
         </FadeIn>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-3">
           {sponsors.map((item, i) => (
             <FadeIn
               key={item.name}
@@ -467,6 +467,14 @@ const Documentary = () => {
               )}
             </FadeIn>
           ))}
+          <FadeIn
+            delay={sponsors.length * 0.1}
+            className="flex flex-col gap-5 p-5 border border-dashed rounded border-white/30"
+          >
+            <p className="text-4xl italic font-extrabold leading-none uppercase font-doc-display text-doc-cream/60">
+              {t('sponsors.future')}
+            </p>
+          </FadeIn>
         </div>
       </section>
 

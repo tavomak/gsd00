@@ -23,8 +23,13 @@
   },
   "director": {
     "label": "The director's vision",
-    "quote": "A journey to Argentina that is also lived in Barcelona.",
-    "body": "Surrendering to the process, where reality becomes the stage. There is no fiction. A place where the present is found. One that speaks for itself. There is no need to direct; there is intention, but it resolves itself in finding what is truly yours, which comes to you when the search is honest. That is <0>En todas las canchas somos Argentina</0>. Calling it a short film limits it; it is much more than a format, more than a story. It is the reality and present of a people, of immigration, culture and identity, a place that takes on an almost religious nuance, the devotion of a country that lives with hope and faith in its blood. Not only through a sport, but in life as a whole. Grateful to have captured much more than an audiovisual piece: an identity proud of itself.",
+    "quote": "Barcelona, Argentina's capital in Europe",
+    "body_title": "En todas las canchas somos Argentina",
+    "body": [
+      "A short documentary portraying Argentine identity outside Argentina, with the 2026 FIFA World Cup as its backdrop and Barcelona as its stage.",
+      "Through the Filial Argentina, its supporters' groups and its people, we explore the life of the emigrant, the sense of belonging and football as a collective expression of an identity that transcends borders.",
+      "Because the pitch is much more than a field: it is a way of life."
+    ],
     "name": "Gonzalo Saavedra",
     "role": "Director",
     "image_alt": "Gonzalo Saavedra seated in front of rows of yellow seats"
@@ -58,7 +63,8 @@
     "items": [
       { "name": "Filial Argentina", "by": "By Diego Justo" },
       { "name": "El Kiosco Argento" }
-    ]
+    ],
+    "future": "Sponsor"
   },
   "footer": {
     "title": "On every pitch we are Argentina",
